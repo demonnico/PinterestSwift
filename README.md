@@ -8,3 +8,17 @@ Refer from [StackOverFlow](http://stackoverflow.com/questions/22900499/how-to-tr
 Something looks like below:
 
 ![](http://i.stack.imgur.com/0fnCd.gif)
+
+##TODO
+
+- [x] Rewrite with Swift [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
+- [] ZoomTransition Implementation
+- [] Add demo
+
+##Creator
+
+[Nicholas Tau](http://www.taofengping.com) ([@demonNico](https://twitter.com/demonnico))
+
+## License
+
+This is available under the MIT license. See the LICENSE file for more info.
