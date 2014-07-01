@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6419AE721961329B00FBEF0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE711961329B00FBEF0D /* AppDelegate.swift */; };
-		6419AE741961329B00FBEF0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE731961329B00FBEF0D /* ViewController.swift */; };
+		6419AE741961329B00FBEF0D /* NTWaterfallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE731961329B00FBEF0D /* NTWaterfallViewController.swift */; };
 		6419AE771961329B00FBEF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6419AE751961329B00FBEF0D /* Main.storyboard */; };
 		6419AE791961329B00FBEF0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6419AE781961329B00FBEF0D /* Images.xcassets */; };
 		6419AE851961329B00FBEF0D /* PinterestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE841961329B00FBEF0D /* PinterestSwiftTests.swift */; };
@@ -60,7 +60,7 @@
 		6419AE6C1961329B00FBEF0D /* PinterestSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinterestSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6419AE701961329B00FBEF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6419AE711961329B00FBEF0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6419AE731961329B00FBEF0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6419AE731961329B00FBEF0D /* NTWaterfallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTWaterfallViewController.swift; sourceTree = "<group>"; };
 		6419AE761961329B00FBEF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6419AE781961329B00FBEF0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6419AE7E1961329B00FBEF0D /* PinterestSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinterestSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,7 +132,7 @@
 				64476DA519617822000B6F19 /* Utils */,
 				6419AE8E1961384700FBEF0D /* Views */,
 				6419AE711961329B00FBEF0D /* AppDelegate.swift */,
-				6419AE731961329B00FBEF0D /* ViewController.swift */,
+				6419AE731961329B00FBEF0D /* NTWaterfallViewController.swift */,
 				64476DEC1962A258000B6F19 /* NTHorizontalPageViewController.swift */,
 				6419AE9819613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift */,
 				6419AE751961329B00FBEF0D /* Main.storyboard */,
@@ -342,7 +342,7 @@
 				64476DED1962A258000B6F19 /* NTHorizontalPageViewController.swift in Sources */,
 				6419AE9919613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift in Sources */,
 				64476DEB1962A1D2000B6F19 /* NTHorizontalPageViewCell.swift in Sources */,
-				6419AE741961329B00FBEF0D /* ViewController.swift in Sources */,
+				6419AE741961329B00FBEF0D /* NTWaterfallViewController.swift in Sources */,
 				6419AE721961329B00FBEF0D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
