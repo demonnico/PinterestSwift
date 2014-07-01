@@ -9,11 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout{
+    
+    var imageNameList : Array <NSString> = []
                             
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = UIColor.yellowColor()
+        
+        var index = 0
+        while(index<14){
+            let imageName = NSString(format: "%d.jpg", index)
+            imageNameList.append(imageName)
+            index++
+        }
         
         var layout: CHTCollectionViewWaterfallLayout = CHTCollectionViewWaterfallLayout()
         
@@ -28,20 +37,24 @@ class ViewController: UIViewController,UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
-        return CGSizeMake(145, 120)
+        let image = UIImage(named: self.imageNameList[indexPath.row] as NSString)
+        let imageHeight = image.size.height*145/image.size.width
+        return CGSizeMake(145, imageHeight)
     }
     
     func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
         var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("identify", forIndexPath: indexPath) as NTWaterfallViewCell
+        collectionCell.imageName = self.imageNameList[indexPath.row]
+        collectionCell.setNeedsLayout()
         return collectionCell;
     }
     
     func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
-        return 100;
+        return imageNameList.count;
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView!) -> Int{
-        return 1
+    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
+        NSLog("%d selected", indexPath.row)
     }
     
     

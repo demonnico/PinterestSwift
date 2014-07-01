@@ -9,8 +9,17 @@
 import UIKit
 
 class NTWaterfallViewCell :UICollectionViewCell{
+    var imageName : String = " "
+    var imageViewContent : UIImageView = UIImageView()
     init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.redColor()
+        backgroundColor = UIColor.lightGrayColor()
+        contentView.addSubview(imageViewContent)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
+        imageViewContent.image = UIImage(named: imageName)
     }
 }
