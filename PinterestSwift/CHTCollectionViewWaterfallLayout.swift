@@ -239,6 +239,16 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
                 self.columnHeights.setObject(top, atIndexedSubscript: idx)
             }
         }
+        
+        idx = 0;
+        let itemCounts = self.allItemAttributes.count
+        while(idx < itemCounts){
+            var rect1 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
+            idx = min(idx + unionSize, itemCounts) - 1
+            var rect2 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
+            self.unionRects.addObject(NSValue(CGRect:CGRectUnion(rect1,rect2)))
+            idx++
+        }
     }
     
     override func collectionViewContentSize() -> CGSize{
