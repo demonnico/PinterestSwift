@@ -12,8 +12,8 @@ Something looks like below:
 ##TODO
 
 - [x] Rewrite with Swift [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
-- [] ZoomTransition Implementation
-- [] Add demo
+- [ ] ZoomTransition Implementation
+- [ ] Add demo
 
 ##Creator
 
