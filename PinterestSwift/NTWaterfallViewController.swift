@@ -26,7 +26,7 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         
         var layout: CHTCollectionViewWaterfallLayout = CHTCollectionViewWaterfallLayout()
         
-        var collectionView = UICollectionView(frame: CGRectMake(0, 0, 320, 480), collectionViewLayout: layout)
+        var collectionView = UICollectionView(frame:screenBounds, collectionViewLayout: layout)
         view.addSubview(collectionView)
         
         collectionView.backgroundColor = UIColor.grayColor()
@@ -54,9 +54,20 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
-        NSLog("%d selected", indexPath.row)
+        let pageViewController = NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout())
+        pageViewController.imageNameList = imageNameList
+        pageViewController.currentIndex = indexPath.row
+        presentViewController(pageViewController, animated: true, completion: {})
     }
     
+    func pageViewControllerLayout () -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = screenSize
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        return flowLayout
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
