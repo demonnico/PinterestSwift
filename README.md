@@ -8,7 +8,7 @@ Refer from [StackOverFlow](http://stackoverflow.com/questions/22900499/how-to-tr
 ##TODO
 
 - [x] Rewrite with Swift [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
-- [ ] ZoomTransition Implementation
+- [x] ZoomTransition Implementation
 - [ ] Add demo
 
 Something looks like below:
