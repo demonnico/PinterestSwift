@@ -13,3 +13,4 @@ let screenBounds = UIScreen.mainScreen().bounds
 let screenSize   = screenBounds.size
 let screenWidth  = screenSize.width
 let screenHeight = screenSize.height
+let navigationHeaderAndStatusbarHeight : CGFloat = 64.0
