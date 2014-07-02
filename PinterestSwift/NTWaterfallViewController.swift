@@ -67,7 +67,7 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         flowLayout.itemSize = screenSize
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        flowLayout.scrollDirection = .Horizontal
         return flowLayout
     }
     
