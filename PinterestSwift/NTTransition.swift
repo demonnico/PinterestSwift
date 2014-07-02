@@ -39,7 +39,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
 
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
-            let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset()
+            let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset().y
             let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
             snapShot.origin(CGPointMake(0, pullOffsetY+offsetY))
             containerView.addSubview(snapShot)
