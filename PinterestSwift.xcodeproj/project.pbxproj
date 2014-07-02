@@ -33,6 +33,8 @@
 		64476DED1962A258000B6F19 /* NTHorizontalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64476DEC1962A258000B6F19 /* NTHorizontalPageViewController.swift */; };
 		64476DEF1962BD97000B6F19 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64476DEE1962BD97000B6F19 /* Macro.swift */; };
 		64476DF21963AAE1000B6F19 /* NTTransitionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64476DF11963AAE1000B6F19 /* NTTransitionProtocol.swift */; };
+		64476DF71963B633000B6F19 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64476DF61963B633000B6F19 /* UIView+Utils.swift */; };
+		6471FF721963BAE9006A0827 /* NTTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6471FF711963BAE9006A0827 /* NTTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		64476DEC1962A258000B6F19 /* NTHorizontalPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTHorizontalPageViewController.swift; sourceTree = "<group>"; };
 		64476DEE1962BD97000B6F19 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		64476DF11963AAE1000B6F19 /* NTTransitionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTransitionProtocol.swift; sourceTree = "<group>"; };
+		64476DF61963B633000B6F19 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		6471FF711963BAE9006A0827 /* NTTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTransition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +137,7 @@
 		6419AE6E1961329B00FBEF0D /* PinterestSwift */ = {
 			isa = PBXGroup;
 			children = (
-				64476DF01963AA8E000B6F19 /* Protocol */,
+				64476DF31963AE86000B6F19 /* Transition */,
 				64476DA519617822000B6F19 /* Utils */,
 				6419AE8E1961384700FBEF0D /* Views */,
 				6419AE711961329B00FBEF0D /* AppDelegate.swift */,
@@ -187,6 +191,7 @@
 			children = (
 				64476DA61961782F000B6F19 /* Utils.swift */,
 				64476DEE1962BD97000B6F19 /* Macro.swift */,
+				64476DF61963B633000B6F19 /* UIView+Utils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -235,6 +240,15 @@
 				64476DF11963AAE1000B6F19 /* NTTransitionProtocol.swift */,
 			);
 			name = Protocol;
+			sourceTree = "<group>";
+		};
+		64476DF31963AE86000B6F19 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				6471FF711963BAE9006A0827 /* NTTransition.swift */,
+				64476DF01963AA8E000B6F19 /* Protocol */,
+			);
+			name = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64476DEF1962BD97000B6F19 /* Macro.swift in Sources */,
+				6471FF721963BAE9006A0827 /* NTTransition.swift in Sources */,
 				64476DA71961782F000B6F19 /* Utils.swift in Sources */,
 				6419AE901961386700FBEF0D /* NTWaterfallViewCell.swift in Sources */,
 				64476DED1962A258000B6F19 /* NTHorizontalPageViewController.swift in Sources */,
@@ -360,6 +375,7 @@
 				6419AE741961329B00FBEF0D /* NTWaterfallViewController.swift in Sources */,
 				6419AE721961329B00FBEF0D /* AppDelegate.swift in Sources */,
 				64476DF21963AAE1000B6F19 /* NTTransitionProtocol.swift in Sources */,
+				64476DF71963B633000B6F19 /* UIView+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
