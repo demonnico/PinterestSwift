@@ -47,8 +47,8 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             toView.hidden = false
             toView.alpha = 0
             toView.transform = snapShot.transform
-//            toView.frame = CGRectMake(-(leftUpperPoint.x * animationScale),-((leftUpperPoint.y-offsetY) * animationScale+pullOffsetY+offsetY),
-//                toView.frame.size.width, toView.frame.size.height) TODO
+            toView.frame = CGRectMake(-(leftUpperPoint.x * animationScale),-((leftUpperPoint.y-offsetY) * animationScale+pullOffsetY+offsetY),
+                toView.frame.size.width, toView.frame.size.height)
             let whiteViewContainer = UIView(frame: screenBounds)
             whiteViewContainer.backgroundColor = UIColor.whiteColor()
             containerView.addSubview(snapShot)
