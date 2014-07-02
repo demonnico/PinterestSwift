@@ -30,6 +30,8 @@ class NTTableViewCell : UITableViewCell{
 
 class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITableViewDataSource{
     var imageName : String = " "
+    var pullAction : (offset : CGPoint) -> Void = { offset in }
+    var tappedAction : () -> Void = {}
     let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.Plain)
     init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,16 +53,6 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         return 10
     }
     
-    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat{
-        var cellHeight : CGFloat = 44
-        if indexPath.row == 0{
-            let image = UIImage(named: imageName)
-            let imageHeight = image.size.height*screenWidth/image.size.width
-            cellHeight = imageHeight
-        }
-        return cellHeight
-    }
-    
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentify) as NTTableViewCell!
@@ -74,5 +66,26 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         }
         cell.setNeedsLayout()
         return cell
+    }
+    
+    
+    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat{
+        var cellHeight : CGFloat = 44
+        if indexPath.row == 0{
+            let image = UIImage(named: imageName)
+            let imageHeight = image.size.height*screenWidth/image.size.width
+            cellHeight = imageHeight
+        }
+        return cellHeight
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
+        tappedAction()
+    }
+    
+    func scrollViewWillBeginDecelerating(scrollView : UIScrollView){
+        if scrollView.contentOffset.y<44{
+            pullAction(offset: scrollView.contentOffset)
+        }
     }
 }

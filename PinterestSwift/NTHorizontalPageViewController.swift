@@ -31,6 +31,8 @@ class NTHorizontalPageViewController : UICollectionViewController{
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
         var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as NTHorizontalPageViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
+        collectionCell.tappedAction = {self.dismissViewControllerAnimated(true, completion:nil)}
+        collectionCell.pullAction = { offset in self.dismissViewControllerAnimated(true, completion: nil)}
         collectionCell.setNeedsLayout()
         return collectionCell
     }
@@ -38,9 +40,4 @@ class NTHorizontalPageViewController : UICollectionViewController{
     override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
     }
-    
-    override func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!) {
-        self.dismissViewControllerAnimated(true, completion: {})
-    }
-    
 }
