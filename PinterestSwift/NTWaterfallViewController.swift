@@ -44,8 +44,8 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
         let image = UIImage(named: self.imageNameList[indexPath.row] as NSString)
-        let imageHeight = image.size.height*145/image.size.width
-        return CGSizeMake(145, imageHeight)
+        let imageHeight = image.size.height*gridWidth/image.size.width
+        return CGSizeMake(gridWidth, imageHeight)
     }
     
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
@@ -80,7 +80,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         var position : UICollectionViewScrollPosition =
         .CenteredHorizontally & .CenteredVertically
         let image = UIImage(named: self.imageNameList[pageIndex] as NSString)
-        let imageHeight = image.size.height*145/image.size.width
+        let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image
            position = .Top
         }

@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-let animationDuration = 4.0
-let animationScale : CGFloat = 2.19123
+let animationDuration = 1.0
+let animationScale : CGFloat = screenWidth/gridWidth // screenWidth / the width of waterfall collection view's grid
 
 class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     var presenting = false
@@ -41,7 +41,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
             let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset().y
             let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
-            snapShot.origin(CGPointMake(0, pullOffsetY+offsetY))
+            snapShot.origin(CGPointMake(0, -pullOffsetY+offsetY))
             containerView.addSubview(snapShot)
             
             toView.hidden = false
