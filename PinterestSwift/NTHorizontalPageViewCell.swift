@@ -37,7 +37,6 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         super.init(frame: frame)
         backgroundColor = UIColor.lightGrayColor()
         
-        
         contentView.addSubview(tableView)
         tableView.registerClass(NTTableViewCell.self, forCellReuseIdentifier: cellIdentify)
         tableView.delegate = self
@@ -70,7 +69,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     
     
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat{
-        var cellHeight : CGFloat = 44
+        var cellHeight : CGFloat = navigationHeight
         if indexPath.row == 0{
             let image = UIImage(named: imageName)
             let imageHeight = image.size.height*screenWidth/image.size.width
@@ -84,7 +83,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     }
     
     func scrollViewWillBeginDecelerating(scrollView : UIScrollView){
-        if scrollView.contentOffset.y<44{
+        if scrollView.contentOffset.y < navigationHeight{
             pullAction(offset: scrollView.contentOffset)
         }
     }
