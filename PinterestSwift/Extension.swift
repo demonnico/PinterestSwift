@@ -24,7 +24,8 @@ extension UICollectionView{
 //        return objc_getAssociatedObject(self,kIndexPathPointer) as NSIndexPath
 //    }set{
 //        objc_setAssociatedObject(self, kIndexPathPointer, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
-//    }} WTF! error when building
+//    }} WTF! error when building, it's a bug 
+//    http://stackoverflow.com/questions/24021291/import-extension-file-in-swift
     
     func setCurrentIndexPath (indexPath : NSIndexPath){
         objc_setAssociatedObject(self, kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
