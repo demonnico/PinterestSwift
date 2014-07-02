@@ -11,25 +11,26 @@ import UIKit
 class NTNavigationController : UINavigationController{
     override func popViewControllerAnimated(animated: Bool) -> UIViewController!
     {
+        //viewWillAppearWithPageIndex
         let childrenCount = self.viewControllers.count
-        let toView  = self.viewControllers[childrenCount-2].view
-        let popedViewController = super.popViewControllerAnimated(animated)
-        let popView  = popedViewController.view
-        if toView is UICollectionView && popView is UICollectionView{
-            let currentIndexPath = (popView as UICollectionView).currentIndexPath()
-            (toView as UICollectionView).setCurrentIndexPath(currentIndexPath)
-        }
-        return popedViewController
+        let toViewController = self.viewControllers[childrenCount-2] as NTWaterFallViewControllerProtocol
+        let toView = toViewController.transitionCollectionView!()
+        let popedViewController = self.viewControllers[childrenCount-1] as UICollectionViewController
+        let popView  = popedViewController.collectionView
+        let indexPath = popView.currentIndexPath()
+        toViewController.viewWillAppearWithPageIndex(indexPath.row)
+        toView.setCurrentIndexPath(popView.currentIndexPath())
+        return super.popViewControllerAnimated(animated)
     }
     
-    override func pushViewController(viewController: UIViewController!, animated: Bool) {
-        let childrenCount = self.viewControllers.count
-        let toView = viewController.view
-        let currentView = self.viewControllers[childrenCount-1].view
-        if toView is UICollectionView && currentView is UICollectionView{
-            let currentIndexPath = (currentView as UICollectionView).currentIndexPath()
-            (toView as UICollectionView).setCurrentIndexPath(currentIndexPath)
-        }
-        super.pushViewController(viewController, animated: animated)
-    }
+//    override func pushViewController(viewController: UIViewController!, animated: Bool) {
+//        let childrenCount = self.viewControllers.count
+//        let toView = viewController.view
+//        let currentView = self.viewControllers[childrenCount-1].view
+////        if toView is UICollectionView && currentView is UICollectionView{
+////            let currentIndexPath = (currentView as UICollectionView).currentIndexPath()
+////            (toView as UICollectionView).setCurrentIndexPath(currentIndexPath)
+////        }
+//        super.pushViewController(viewController, animated: animated)
+//    }
 }

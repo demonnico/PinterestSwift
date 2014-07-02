@@ -11,11 +11,11 @@ import UIKit
 
 let horizontalPageViewCellIdentify = "horizontalPageViewCellIdentify"
 
-class NTHorizontalPageViewController : UICollectionViewController, NTTransitionProtocol{
+class NTHorizontalPageViewController : UICollectionViewController, NTTransitionProtocol ,NTHorizontalPageViewControllerProtocol{
     
     var imageNameList : Array <NSString> = []
     var currentIndex = 0
-    
+    var pullOffset = CGPointZero
     override func viewDidLoad(){
         super.viewDidLoad()
         self.collectionView.pagingEnabled = true
@@ -31,8 +31,11 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
         var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as NTHorizontalPageViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
-        collectionCell.tappedAction = {self.dismissViewControllerAnimated(true, completion:nil)}
-        collectionCell.pullAction = { offset in self.dismissViewControllerAnimated(true, completion: nil)}
+        collectionCell.tappedAction = {}
+        collectionCell.pullAction = { offset in
+            self.pullOffset = offset
+            self.navigationController.popViewControllerAnimated(true)
+        }
         collectionCell.setNeedsLayout()
         return collectionCell
     }
@@ -43,5 +46,9 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
     
     func transitionCollectionView() -> UICollectionView!{
         return collectionView
+    }
+    
+    func pageViewCellScrollViewContentOffset() -> CGPoint{
+        return self.pullOffset
     }
 }

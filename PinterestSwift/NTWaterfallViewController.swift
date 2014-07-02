@@ -10,14 +10,22 @@ import UIKit
 
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
-class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
+class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate{
+    func navigationController(navigationController: UINavigationController!, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController!, toViewController toVC: UIViewController!) -> UIViewControllerAnimatedTransitioning!{
+        let transition = NTTransition()
+        transition.presenting = operation == .Pop
+        return  transition
+    }
+}
+
+class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
 //    class var sharedInstance: NSInteger = 0 Are u kidding me?
-    let collectionView : UICollectionView = UICollectionView(frame: screenBounds, collectionViewLayout: CHTCollectionViewWaterfallLayout())
     var imageNameList : Array <NSString> = []
-    
+    let delegateHolder = NavigationControllerDelegate()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.navigationController.delegate = delegateHolder
         self.view.backgroundColor = UIColor.yellowColor()
         
         var index = 0
@@ -27,13 +35,11 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
             index++
         }
         
-        self.view.addSubview(collectionView)
-        
+        collectionView.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
         collectionView.backgroundColor = UIColor.grayColor()
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         collectionView.reloadData()
+
     }
     
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
@@ -42,22 +48,23 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         return CGSizeMake(145, imageHeight)
     }
     
-    func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
+    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
         var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
     
-    func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
+    override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
     }
     
-    func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
+    override func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
         let pageViewController = NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout())
         pageViewController.imageNameList = imageNameList
         pageViewController.currentIndex = indexPath.row
-        presentViewController(pageViewController, animated: true, completion: {})
+        collectionView.setCurrentIndexPath(indexPath)
+        navigationController.pushViewController(pageViewController, animated: true)
     }
     
     func pageViewControllerLayout () -> UICollectionViewFlowLayout {
