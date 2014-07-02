@@ -10,12 +10,8 @@ import Foundation
 import UIKit
 
 extension UIView{
-    var origin : CGPoint{
-    set{
-//        frame.origin.x = newValue.x
-//        frame.origin.y = newValue.y
+    func origin (point : CGPoint){
+        frame.origin.x = point.x
+        frame.origin.y = point.y
     }
-    get{
-        return CGPointZero//frame.origin
-    }}
 }
