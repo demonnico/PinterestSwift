@@ -60,9 +60,9 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     }
     
     override func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
-        let pageViewController = NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout())
+        let pageViewController =
+        NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout(), currentIndexPath:indexPath)
         pageViewController.imageNameList = imageNameList
-        pageViewController.currentIndex = indexPath.row
         collectionView.setCurrentIndexPath(indexPath)
         navigationController.pushViewController(pageViewController, animated: true)
     }

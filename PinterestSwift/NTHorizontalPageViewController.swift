@@ -14,18 +14,21 @@ let horizontalPageViewCellIdentify = "horizontalPageViewCellIdentify"
 class NTHorizontalPageViewController : UICollectionViewController, NTTransitionProtocol ,NTHorizontalPageViewControllerProtocol{
     
     var imageNameList : Array <NSString> = []
-    var currentIndex = 0
     var pullOffset = CGPointZero
-    override func viewDidLoad(){
-        super.viewDidLoad()
+    
+    init(collectionViewLayout layout: UICollectionViewLayout!, currentIndexPath indexPath: NSIndexPath){
+        super.init(collectionViewLayout:layout)
         self.collectionView.pagingEnabled = true
         self.collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
-       
-        let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
+        collectionView.setCurrentIndexPath(indexPath)
         self.collectionView.performBatchUpdates({self.collectionView.reloadData()}, completion: { finished in
             if finished {
                 self.collectionView.scrollToItemAtIndexPath(indexPath,atScrollPosition:.CenteredHorizontally, animated: false)
             }});
+    }
+    
+    override func viewDidLoad(){
+        super.viewDidLoad()
     }
     
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
