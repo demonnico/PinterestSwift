@@ -17,14 +17,6 @@ import UIKit
     func snapShotForTransition() -> UIView!
 }
 
-@objc protocol NTWaterFallViewProtocol{
-    func currentGridViewIndexPath() -> NSIndexPath!
-}
-
-@objc protocol NTHorizontalPageViewProtocol{
-    func currentPageViewIndexPath() -> NSIndexPath!
-}
-
 @objc protocol NTWaterFallViewControllerProtocol : NTTransitionProtocol{
     func viewWillAppearWithPageIndex() -> NSInteger
 }
