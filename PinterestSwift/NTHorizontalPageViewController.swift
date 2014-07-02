@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let horizontalPageViewCellIdentify = "horizontalPageViewCellIdentify"
+
 class NTHorizontalPageViewController : UICollectionViewController{
     
     var imageNameList : Array <NSString> = []
@@ -17,7 +19,7 @@ class NTHorizontalPageViewController : UICollectionViewController{
     override func viewDidLoad(){
         super.viewDidLoad()
         self.collectionView.pagingEnabled = true
-        self.collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: "identify")
+        self.collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
        
         let indexPath = NSIndexPath(forRow: currentIndex, inSection: 0)
         self.collectionView.performBatchUpdates({self.collectionView.reloadData()}, completion: { finished in
@@ -27,7 +29,7 @@ class NTHorizontalPageViewController : UICollectionViewController{
     }
     
     override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
-        var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("identify", forIndexPath: indexPath) as NTHorizontalPageViewCell
+        var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as NTHorizontalPageViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.setNeedsLayout()
         return collectionCell

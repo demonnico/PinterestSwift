@@ -8,6 +8,8 @@
 
 import UIKit
 
+let waterfallViewCellIdentify = "waterfallViewCellIdentify"
+
 class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout{
     
     var imageNameList : Array <NSString> = []
@@ -32,7 +34,7 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         collectionView.backgroundColor = UIColor.grayColor()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: "identify")
+        collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         collectionView.reloadData()
     }
     
@@ -43,7 +45,7 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
     }
     
     func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
-        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("identify", forIndexPath: indexPath) as NTWaterfallViewCell
+        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.setNeedsLayout()
         return collectionCell;
