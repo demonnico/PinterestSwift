@@ -32,10 +32,13 @@ extension UICollectionView{
     }
     
     func currentIndexPath () -> NSIndexPath {
-        if let indexPath = objc_getAssociatedObject(self,kIndexPathPointer) as? NSIndexPath {
-            return indexPath
-        }
         let index = self.contentOffset.x/self.frame.size.width
-        return NSIndexPath(forRow: Int(index), inSection: 0)
+        if index > 0{
+            return NSIndexPath(forRow: Int(index), inSection: 0)
+        }else if let indexPath = objc_getAssociatedObject(self,kIndexPathPointer) as? NSIndexPath {
+            return indexPath
+        }else{
+            return NSIndexPath(forRow: 0, inSection: 0)
+        }
     }
 }
