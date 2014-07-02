@@ -32,7 +32,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let waterFallView = (toViewController as NTTransitionProtocol).transitionCollectionView!()
             let pageView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
             
-            waterFallView.layoutSubviews()
+            waterFallView.layoutIfNeeded()
             let indexPath = pageView.currentIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
             let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
