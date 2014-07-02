@@ -33,7 +33,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let pageView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
             
             waterFallView.layoutSubviews()
-            let indexPath = (pageView as NTHorizontalPageViewProtocol).currentPageViewIndexPath()
+            let indexPath = pageView.currentIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
             let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
 
@@ -78,7 +78,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             containerView.addSubview(fromView)
             containerView.addSubview(toView)
             
-            let indexPath = (waterFallView as NTWaterFallViewProtocol).currentGridViewIndexPath()
+            let indexPath = waterFallView.currentIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
             
             let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
