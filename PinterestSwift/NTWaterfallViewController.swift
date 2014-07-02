@@ -69,6 +69,23 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         return flowLayout
     }
     
+    func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
+        var position : UICollectionViewScrollPosition =
+        .CenteredHorizontally & .CenteredVertically
+        let image = UIImage(named: self.imageNameList[pageIndex] as NSString)
+        let imageHeight = image.size.height*145/image.size.width
+        if imageHeight > 400 {//whatever you like, it's the max value for height of image
+           position = .Top
+        }
+        let currentIndexPath = NSIndexPath(forRow: pageIndex, inSection: 0)
+        collectionView.setCurrentIndexPath(currentIndexPath)
+        if pageIndex<2{
+            collectionView.setContentOffset(CGPointZero, animated: false)
+        }else{
+            collectionView.scrollToItemAtIndexPath(currentIndexPath, atScrollPosition: position, animated: false)
+        }
+    }
+    
     func transitionCollectionView() -> UICollectionView!{
         return collectionView
     }
