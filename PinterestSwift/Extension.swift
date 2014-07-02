@@ -15,3 +15,26 @@ extension UIView{
         frame.origin.y = point.y
     }
 }
+
+var kIndexPathKey = "kAlwaysBouncePlaceholder"
+let kIndexPathPointer: CConstVoidPointer = &kIndexPathKey
+extension UICollectionView{
+//    var currentIndexPath : NSIndexPath{
+//    get{
+//        return objc_getAssociatedObject(self,kIndexPathPointer) as NSIndexPath
+//    }set{
+//        objc_setAssociatedObject(self, kIndexPathPointer, newValue, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+//    }} WTF! error when building
+    
+    func setCurrentIndexPath (indexPath : NSIndexPath){
+        objc_setAssociatedObject(self, kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+    }
+    
+    func currentIndexPath () -> NSIndexPath {
+        if let indexPath = objc_getAssociatedObject(self,kIndexPathPointer) as? NSIndexPath {
+            return indexPath
+        }
+        let index = self.contentOffset.x/self.frame.size.width
+        return NSIndexPath(forRow: Int(index), inSection: 0)
+    }
+}
