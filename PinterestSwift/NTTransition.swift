@@ -41,7 +41,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
             let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset()
             let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
-//            snapShot.origin = CGPointMake(0, pullOffsetY+offsetY) WTF
+            snapShot.origin(CGPointMake(0, pullOffsetY+offsetY))
             containerView.addSubview(snapShot)
             
             toView.hidden = false
@@ -56,10 +56,10 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             
             UIView.animateWithDuration(animationDuration, animations: {
                 snapShot.transform = CGAffineTransformIdentity
-//                snapShot.origin = leftUpperPoint WTF
+                snapShot.origin(leftUpperPoint)
                 
                 toView.transform = CGAffineTransformIdentity
-//                toView.origin = CGPointMake(0, offsetY) WTF
+                toView.origin(CGPointMake(0, offsetY))
                 toView.alpha = 1
                 }, completion:{finished in
                     if finished {
@@ -88,12 +88,12 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             containerView.addSubview(snapShot)
-//            snapShot.origin = leftUpperPoint TODO WTF,ERROR When building
+            snapShot.origin(leftUpperPoint)
             
             UIView.animateWithDuration(animationDuration, animations: {
                 snapShot.transform = CGAffineTransformMakeScale(animationScale,
                     animationScale)
-//                snapShot.origin = CGPointMake(0, offsetY) WTF!
+                snapShot.origin(CGPointMake(0, offsetY))
                 
                 fromView.alpha = 0
                 fromView.transform = snapShot.transform
