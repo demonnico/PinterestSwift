@@ -20,20 +20,61 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning!) {
+        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController
+        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController
+        let containerView = transitionContext.containerView()
+
         if presenting {
+            let toView = toViewController.view
+            containerView.addSubview(toView)
+            toView.hidden = true
             
+            let waterFallView = (toViewController as NTTransitionProtocol).transitionCollectionView!()
+            let pageView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
+            
+            waterFallView.layoutSubviews()
+            let indexPath = (pageView as NTWaterFallViewProtocol).currentGridViewIndexPath()
+            let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
+            let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
+
+            let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
+            snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
+            let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset()
+            let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+//            snapShot.origin = CGPointMake(0, pullOffsetY+offsetY) WTF
+            containerView.addSubview(snapShot)
+            
+            toView.hidden = false
+            toView.alpha = 0
+            toView.transform = snapShot.transform
+//            toView.frame = CGRectMake(-(leftUpperPoint.x * animationScale),-((leftUpperPoint.y-offsetY) * animationScale+pullOffsetY+offsetY),
+//                toView.frame.size.width, toView.frame.size.height) TODO
+            let whiteViewContainer = UIView(frame: screenBounds)
+            whiteViewContainer.backgroundColor = UIColor.whiteColor()
+            containerView.addSubview(snapShot)
+            containerView.insertSubview(whiteViewContainer, belowSubview: toView)
+            
+            UIView.animateWithDuration(animationDuration, animations: {
+                snapShot.transform = CGAffineTransformIdentity
+//                snapShot.origin = leftUpperPoint WTF
+                
+                toView.transform = CGAffineTransformIdentity
+//                toView.origin = CGPointMake(0, offsetY) WTF
+                toView.alpha = 1
+                }, completion:{finished in
+                    if finished {
+                        snapShot.removeFromSuperview()
+                        whiteViewContainer.removeFromSuperview()
+                        transitionContext.completeTransition(true)
+                    }
+                })
         }else{
-            let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController
-            let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-            as UIViewController
-            
             let fromView = fromViewController.view
             let toView = toViewController.view
             
             let waterFallView : UICollectionView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
             let pageView : UICollectionView = (toViewController as NTTransitionProtocol).transitionCollectionView!()
             
-            let containerView = transitionContext.containerView()
             containerView.addSubview(fromView)
             containerView.addSubview(toView)
             
@@ -60,6 +101,13 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
                     -(leftUpperPoint.y-offsetY)*animationScale+offsetY,
                     fromView.frame.size.width,
                     fromView.frame.size.height)
+                },completion:{finished in
+                    if finished {
+                        snapShot.removeFromSuperview()
+                        pageView.hidden = false
+                        fromView.transform = CGAffineTransformIdentity
+                        transitionContext.completeTransition(true)
+                    }
                 })
         }
     }

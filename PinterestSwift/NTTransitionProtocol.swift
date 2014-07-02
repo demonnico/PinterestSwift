@@ -21,14 +21,14 @@ import UIKit
     func currentGridViewIndexPath() -> NSIndexPath!
 }
 
-protocol NTHorizontalPageViewProtocol{
+@objc protocol NTHorizontalPageViewProtocol{
     func currentPageViewIndexPath() -> NSIndexPath!
 }
 
-protocol NTWaterFallViewControllerProtocol : NTTransitionProtocol{
-    func viewWillAppearWithPageIndex() -> NSInteger!
+@objc protocol NTWaterFallViewControllerProtocol : NTTransitionProtocol{
+    func viewWillAppearWithPageIndex() -> NSInteger
 }
 
-protocol NTHorizontalPageViewControllerProtocol : NTTransitionProtocol{
-    func pageViewCellScrollViewContentOffset() -> CGPoint!
+@objc protocol NTHorizontalPageViewControllerProtocol : NTTransitionProtocol{
+    func pageViewCellScrollViewContentOffset() -> CGPoint
 }
