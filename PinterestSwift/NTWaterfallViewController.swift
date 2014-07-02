@@ -10,7 +10,7 @@ import UIKit
 
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
-class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol{
+class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol, NTWaterFallViewControllerProtocol{
 //    class var sharedInstance: NSInteger = 0 Are u kidding me?
     let collectionView : UICollectionView = UICollectionView(frame: screenBounds, collectionViewLayout: CHTCollectionViewWaterfallLayout())
     var imageNameList : Array <NSString> = []
