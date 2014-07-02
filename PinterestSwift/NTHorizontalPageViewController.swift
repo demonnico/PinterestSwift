@@ -11,7 +11,7 @@ import UIKit
 
 let horizontalPageViewCellIdentify = "horizontalPageViewCellIdentify"
 
-class NTHorizontalPageViewController : UICollectionViewController{
+class NTHorizontalPageViewController : UICollectionViewController, NTTransitionProtocol{
     
     var imageNameList : Array <NSString> = []
     var currentIndex = 0
@@ -39,5 +39,9 @@ class NTHorizontalPageViewController : UICollectionViewController{
     
     override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
+    }
+    
+    func transitionCollectionView() -> UICollectionView!{
+        return collectionView
     }
 }

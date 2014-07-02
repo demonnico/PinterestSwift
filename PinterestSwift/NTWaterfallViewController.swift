@@ -10,10 +10,10 @@ import UIKit
 
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
-class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout{
-    
+class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, NTTransitionProtocol{
+    let collectionView : UICollectionView = UICollectionView(frame: screenBounds, collectionViewLayout: CHTCollectionViewWaterfallLayout())
     var imageNameList : Array <NSString> = []
-                            
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,10 +26,7 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
             index++
         }
         
-        var layout: CHTCollectionViewWaterfallLayout = CHTCollectionViewWaterfallLayout()
-        
-        var collectionView = UICollectionView(frame:screenBounds, collectionViewLayout: layout)
-        view.addSubview(collectionView)
+        self.view.addSubview(collectionView)
         
         collectionView.backgroundColor = UIColor.grayColor()
         collectionView.delegate = self
@@ -69,6 +66,10 @@ class NTWaterfallViewController: UIViewController,UICollectionViewDataSource, UI
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .Horizontal
         return flowLayout
+    }
+    
+    func transitionCollectionView() -> UICollectionView!{
+        return collectionView
     }
     
     override func didReceiveMemoryWarning() {
