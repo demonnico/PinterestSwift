@@ -59,7 +59,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
                 snapShot.origin(leftUpperPoint)
                 
                 toView.transform = CGAffineTransformIdentity
-                toView.origin(CGPointMake(0, offsetY))
+                toView.origin(CGPointZero)
                 toView.alpha = 1
                 }, completion:{finished in
                     if finished {
@@ -86,6 +86,8 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             pageView.scrollToItemAtIndexPath(indexPath, atScrollPosition:.CenteredHorizontally, animated: false)
             
             let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+            let offsetStatuBar : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 :
+                statubarHeight;
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             containerView.addSubview(snapShot)
             snapShot.origin(leftUpperPoint)
@@ -98,7 +100,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
                 fromView.alpha = 0
                 fromView.transform = snapShot.transform
                 fromView.frame = CGRectMake(-(leftUpperPoint.x)*animationScale,
-                    -(leftUpperPoint.y-offsetY)*animationScale+offsetY,
+                    -(leftUpperPoint.y-offsetStatuBar)*animationScale+offsetStatuBar,
                     fromView.frame.size.width,
                     fromView.frame.size.height)
                 },completion:{finished in
