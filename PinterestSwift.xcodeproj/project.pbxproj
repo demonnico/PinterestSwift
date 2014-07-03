@@ -139,15 +139,13 @@
 		6419AE6E1961329B00FBEF0D /* PinterestSwift */ = {
 			isa = PBXGroup;
 			children = (
+				64482A741964EA9A005D3D93 /* Layout */,
+				64482A731964EA8C005D3D93 /* ViewControllers */,
 				64E88A2D1963F1B000D982B3 /* Extensions */,
 				64476DF31963AE86000B6F19 /* Transition */,
 				64476DA519617822000B6F19 /* Utils */,
 				6419AE8E1961384700FBEF0D /* Views */,
 				6419AE711961329B00FBEF0D /* AppDelegate.swift */,
-				6419AE731961329B00FBEF0D /* NTWaterfallViewController.swift */,
-				64E88A2E196419D300D982B3 /* NTNavigationController.swift */,
-				64476DEC1962A258000B6F19 /* NTHorizontalPageViewController.swift */,
-				6419AE9819613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift */,
 				6419AE751961329B00FBEF0D /* Main.storyboard */,
 				64476DA819629BAA000B6F19 /* images */,
 				6419AE781961329B00FBEF0D /* Images.xcassets */,
@@ -252,6 +250,24 @@
 				64476DF01963AA8E000B6F19 /* Protocol */,
 			);
 			name = Transition;
+			sourceTree = "<group>";
+		};
+		64482A731964EA8C005D3D93 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6419AE731961329B00FBEF0D /* NTWaterfallViewController.swift */,
+				64E88A2E196419D300D982B3 /* NTNavigationController.swift */,
+				64476DEC1962A258000B6F19 /* NTHorizontalPageViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		64482A741964EA9A005D3D93 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				6419AE9819613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift */,
+			);
+			name = Layout;
 			sourceTree = "<group>";
 		};
 		64E88A2D1963F1B000D982B3 /* Extensions */ = {
