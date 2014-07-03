@@ -9,11 +9,15 @@ Refer from [StackOverFlow](http://stackoverflow.com/questions/22900499/how-to-tr
 
 - [x] Rewrite with Swift [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
 - [x] ZoomTransition Implementation
-- [ ] Add demo
+- [x] Add demo
 
 Something looks like below:
 
 ![](http://i.stack.imgur.com/0fnCd.gif)
+
+And this is my copy:
+
+![](https://raw.githubusercontent.com/demon1105/ImagesLib/master/compressed.gif)
 
 ##Creator
 
