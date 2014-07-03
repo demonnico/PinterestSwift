@@ -35,6 +35,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
             index++
         }
         
+        collectionView.frame = screenBounds
         collectionView.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
         collectionView.backgroundColor = UIColor.grayColor()
         collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
@@ -69,7 +70,9 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     
     func pageViewControllerLayout () -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = screenSize
+        let itemSize  = self.navigationController.navigationBarHidden ?
+        CGSizeMake(screenWidth, screenHeight+20) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
+        flowLayout.itemSize = itemSize
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.scrollDirection = .Horizontal
