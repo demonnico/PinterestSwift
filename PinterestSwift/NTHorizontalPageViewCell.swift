@@ -61,7 +61,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
             let image = UIImage(named: imageName)
             cell.imageView.image = image
         }else{
-            cell.textLabel.text = "you'd custom this table view as you will"
+            cell.textLabel.text = "try pull to pop view controller 😃"
         }
         cell.setNeedsLayout()
         return cell
