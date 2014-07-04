@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let animationDuration = 1.0
+let animationDuration = 0.35
 let animationScale : CGFloat = screenWidth/gridWidth // screenWidth / the width of waterfall collection view's grid
 
 class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
