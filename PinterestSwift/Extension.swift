@@ -17,7 +17,7 @@ extension UIView{
 }
 
 var kIndexPathKey = "kAlwaysBouncePlaceholder"
-let kIndexPathPointer: CConstVoidPointer = &kIndexPathKey
+let kIndexPathPointer: ConstUnsafePointer<String> = ConstUnsafePointer<String>(COpaquePointer(&kIndexPathKey))
 extension UICollectionView{
 //    var currentIndexPath : NSIndexPath{
 //    get{

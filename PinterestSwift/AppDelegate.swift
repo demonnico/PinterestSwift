@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         // Override point for customization after application launch.
-        var navigationContorller = self.window?.rootViewController as UINavigationController
-        navigationContorller.setNavigationBarHidden(true, animated: false)
+//        var navigationContorller = self.window?.rootViewController as UINavigationController
+//        navigationContorller.setNavigationBarHidden(true, animated: false)
         return true
     }
 
