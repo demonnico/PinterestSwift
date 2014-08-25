@@ -14,7 +14,6 @@
 		6419AE851961329B00FBEF0D /* PinterestSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE841961329B00FBEF0D /* PinterestSwiftTests.swift */; };
 		6419AE901961386700FBEF0D /* NTWaterfallViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE8F1961386700FBEF0D /* NTWaterfallViewCell.swift */; };
 		6419AE9919613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6419AE9819613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift */; };
-		64476DA71961782F000B6F19 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64476DA61961782F000B6F19 /* Utils.swift */; };
 		64476DB719629BAA000B6F19 /* 0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64476DA919629BAA000B6F19 /* 0.jpg */; };
 		64476DB819629BAA000B6F19 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64476DAA19629BAA000B6F19 /* 1.jpg */; };
 		64476DB919629BAA000B6F19 /* 10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64476DAB19629BAA000B6F19 /* 10.jpg */; };
@@ -73,7 +72,6 @@
 		6419AE841961329B00FBEF0D /* PinterestSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestSwiftTests.swift; sourceTree = "<group>"; };
 		6419AE8F1961386700FBEF0D /* NTWaterfallViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTWaterfallViewCell.swift; sourceTree = "<group>"; };
 		6419AE9819613E7F00FBEF0D /* CHTCollectionViewWaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CHTCollectionViewWaterfallLayout.swift; sourceTree = "<group>"; };
-		64476DA61961782F000B6F19 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		64476DA919629BAA000B6F19 /* 0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 0.jpg; sourceTree = "<group>"; };
 		64476DAA19629BAA000B6F19 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		64476DAB19629BAA000B6F19 /* 10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10.jpg; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 		64476DA519617822000B6F19 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				64476DA61961782F000B6F19 /* Utils.swift */,
 				64476DEE1962BD97000B6F19 /* Macro.swift */,
 			);
 			name = Utils;
@@ -394,7 +391,6 @@
 			files = (
 				64476DEF1962BD97000B6F19 /* Macro.swift in Sources */,
 				6471FF721963BAE9006A0827 /* NTTransition.swift in Sources */,
-				64476DA71961782F000B6F19 /* Utils.swift in Sources */,
 				6419AE901961386700FBEF0D /* NTWaterfallViewCell.swift in Sources */,
 				64476DED1962A258000B6F19 /* NTHorizontalPageViewController.swift in Sources */,
 				64E88A2F196419D300D982B3 /* NTNavigationController.swift in Sources */,
@@ -523,6 +519,7 @@
 				INFOPLIST_FILE = PinterestSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "21E2ADFC-DC89-45E2-8E4E-9DC0BCD8756D";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -536,6 +533,7 @@
 				INFOPLIST_FILE = PinterestSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "21E2ADFC-DC89-45E2-8E4E-9DC0BCD8756D";
 			};
 			name = Release;
 		};

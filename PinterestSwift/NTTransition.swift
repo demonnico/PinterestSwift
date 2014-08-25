@@ -29,8 +29,8 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             containerView.addSubview(toView)
             toView.hidden = true
             
-            let waterFallView = (toViewController as NTTransitionProtocol).transitionCollectionView!()
-            let pageView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
+            let waterFallView = (toViewController as NTTransitionProtocol).transitionCollectionView()
+            let pageView = (fromViewController as NTTransitionProtocol).transitionCollectionView()
             
             waterFallView.layoutIfNeeded()
             let indexPath = pageView.currentIndexPath()
@@ -73,8 +73,8 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let fromView = fromViewController.view
             let toView = toViewController.view
             
-            let waterFallView : UICollectionView = (fromViewController as NTTransitionProtocol).transitionCollectionView!()
-            let pageView : UICollectionView = (toViewController as NTTransitionProtocol).transitionCollectionView!()
+            let waterFallView : UICollectionView = (fromViewController as NTTransitionProtocol).transitionCollectionView()
+            let pageView : UICollectionView = (toViewController as NTTransitionProtocol).transitionCollectionView()
             
             containerView.addSubview(fromView)
             containerView.addSubview(toView)

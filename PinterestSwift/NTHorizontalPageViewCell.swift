@@ -13,15 +13,19 @@ let cellIdentify = "cellIdentify"
 
 class NTTableViewCell : UITableViewCell{
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel.font = UIFont.systemFontOfSize(13)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         imageView.frame = CGRectZero
-        if imageView.image {
+        if (imageView.image != nil) {
             let imageHeight = imageView.image.size.height*screenWidth/imageView.image.size.width
             imageView.frame = CGRectMake(0, 0, screenWidth, imageHeight)
         }
@@ -33,7 +37,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     var pullAction : (offset : CGPoint) -> Void = { offset in }
     var tappedAction : () -> Void = {}
     let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.Plain)
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.lightGrayColor()
         
@@ -41,6 +45,10 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         tableView.registerClass(NTTableViewCell.self, forCellReuseIdentifier: cellIdentify)
         tableView.delegate = self
         tableView.dataSource = self
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func layoutSubviews() {

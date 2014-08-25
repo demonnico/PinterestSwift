@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objc protocol NTTransitionProtocol{
-    @optional func transitionCollectionView() -> UICollectionView!
+    func transitionCollectionView() -> UICollectionView!
 }
 
 @objc protocol NTTansitionWaterfallGridViewProtocol{
