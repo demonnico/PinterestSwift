@@ -33,9 +33,9 @@ class NTTableViewCell : UITableViewCell{
 }
 
 class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITableViewDataSource{
-    var imageName : String = " "
-    var pullAction : (offset : CGPoint) -> Void = { offset in }
-    var tappedAction : () -> Void = {}
+    var imageName : String?
+    var pullAction : ((offset : CGPoint) -> Void)?
+    var tappedAction : (() -> Void)?
     let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.Plain)
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,12 +87,12 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
-        tappedAction()
+        tappedAction?()
     }
     
     func scrollViewWillBeginDecelerating(scrollView : UIScrollView){
         if scrollView.contentOffset.y < navigationHeight{
-            pullAction(offset: scrollView.contentOffset)
+            pullAction?(offset: scrollView.contentOffset)
         }
     }
 }
