@@ -28,14 +28,14 @@ extension UICollectionView{
 //    http://stackoverflow.com/questions/24021291/import-extension-file-in-swift
     
     func setCurrentIndexPath (indexPath : NSIndexPath){
-        objc_setAssociatedObject(self, kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
     }
     
     func currentIndexPath () -> NSIndexPath {
         let index = self.contentOffset.x/self.frame.size.width
         if index > 0{
             return NSIndexPath(forRow: Int(index), inSection: 0)
-        }else if let indexPath = objc_getAssociatedObject(self,kIndexPathPointer) as? NSIndexPath {
+        }else if let indexPath = objc_getAssociatedObject(self,&kIndexPathPointer) as? NSIndexPath {
             return indexPath
         }else{
             return NSIndexPath(forRow: 0, inSection: 0)
