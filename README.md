@@ -1,7 +1,7 @@
 PinterestSwift
 ==============
 
-***Please Build With Xcode6 beta3, I won't fixed build error util Xcode6 GM relesed.😱***
+***Please Build With Xcode6 beta6***
 
 This is a Swift based demo project to show how to make the transition Pinterest 2.0+ liked.
 
