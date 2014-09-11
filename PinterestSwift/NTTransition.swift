@@ -15,13 +15,13 @@ let animationScale : CGFloat = screenWidth/gridWidth // screenWidth / the width 
 class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     var presenting = false
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning!) -> NSTimeInterval{
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval{
         return animationDuration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning!) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController!
+        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController!
         let containerView = transitionContext.containerView()
 
         if presenting {
@@ -35,12 +35,12 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             waterFallView.layoutIfNeeded()
             let indexPath = pageView.currentIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
-            let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
+            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: nil)
 
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
             let pullOffsetY = (fromViewController as NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset().y
-            let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+            let offsetY : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
             snapShot.origin(CGPointMake(0, -pullOffsetY+offsetY))
             containerView.addSubview(snapShot)
             
@@ -81,12 +81,12 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let indexPath = waterFallView.currentIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
             
-            let leftUpperPoint = gridView.convertPoint(CGPointZero, toView: nil)
+            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: nil)
             pageView.hidden = true
             pageView.scrollToItemAtIndexPath(indexPath, atScrollPosition:.CenteredHorizontally, animated: false)
             
-            let offsetY : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
-            let offsetStatuBar : CGFloat = fromViewController.navigationController.navigationBarHidden ? 0.0 :
+            let offsetY : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+            let offsetStatuBar : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 :
                 statubarHeight;
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             containerView.addSubview(snapShot)

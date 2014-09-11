@@ -22,7 +22,7 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
     override func layoutSubviews() {
         super.layoutSubviews()
         imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
-        imageViewContent.image = UIImage(named: imageName)
+        imageViewContent.image = UIImage(named: imageName!)
     }
     
     func snapShotForTransition() -> UIView! {
