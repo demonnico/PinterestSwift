@@ -56,10 +56,9 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             
             UIView.animateWithDuration(animationDuration, animations: {
                 snapShot.transform = CGAffineTransformIdentity
-                snapShot.origin(leftUpperPoint)
-                
+                snapShot.frame = CGRectMake(leftUpperPoint.x, leftUpperPoint.y, snapShot.frame.size.width, snapShot.frame.size.height)
                 toView.transform = CGAffineTransformIdentity
-                toView.origin(CGPointZero)
+                toView.frame = CGRectMake(0, 0, toView.frame.size.width, toView.frame.size.height);
                 toView.alpha = 1
                 }, completion:{finished in
                     if finished {
@@ -91,11 +90,10 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             let snapShot = (gridView as NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             containerView.addSubview(snapShot)
             snapShot.origin(leftUpperPoint)
-            
             UIView.animateWithDuration(animationDuration, animations: {
                 snapShot.transform = CGAffineTransformMakeScale(animationScale,
                     animationScale)
-                snapShot.origin(CGPointMake(0, offsetY))
+                snapShot.frame = CGRectMake(0, offsetY, snapShot.frame.size.width, snapShot.frame.size.height)
                 
                 fromView.alpha = 0
                 fromView.transform = snapShot.transform
