@@ -25,7 +25,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationController.delegate = delegateHolder
+        self.navigationController!.delegate = delegateHolder
         self.view.backgroundColor = UIColor.yellowColor()
         
         var index = 0
@@ -35,42 +35,42 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
             index++
         }
         
-        collectionView.frame = screenBounds
-        collectionView.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
-        collectionView.backgroundColor = UIColor.grayColor()
-        collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
-        collectionView.reloadData()
+        collectionView!.frame = screenBounds
+        collectionView!.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
+        collectionView!.backgroundColor = UIColor.grayColor()
+        collectionView!.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
+        collectionView!.reloadData()
 
     }
     
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
         let image = UIImage(named: self.imageNameList[indexPath.row] as NSString)
         let imageHeight = image.size.height*gridWidth/image.size.width
         return CGSizeMake(gridWidth, imageHeight)
     }
     
-    override func collectionView(collectionView: UICollectionView!, cellForItemAtIndexPath indexPath: NSIndexPath!) -> UICollectionViewCell!{
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
         var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row]
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
     
-    override func collectionView(collectionView: UICollectionView!, numberOfItemsInSection section: Int) -> Int{
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
     }
     
-    override func collectionView(collectionView: UICollectionView!, didSelectItemAtIndexPath indexPath: NSIndexPath!){
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let pageViewController =
         NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout(), currentIndexPath:indexPath)
         pageViewController.imageNameList = imageNameList
         collectionView.setCurrentIndexPath(indexPath)
-        navigationController.pushViewController(pageViewController, animated: true)
+        navigationController!.pushViewController(pageViewController, animated: true)
     }
     
     func pageViewControllerLayout () -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        let itemSize  = self.navigationController.navigationBarHidden ?
+        let itemSize  = self.navigationController!.navigationBarHidden ?
         CGSizeMake(screenWidth, screenHeight+20) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
         flowLayout.itemSize = itemSize
         flowLayout.minimumLineSpacing = 0
@@ -88,11 +88,11 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
            position = .Top
         }
         let currentIndexPath = NSIndexPath(forRow: pageIndex, inSection: 0)
-        collectionView.setCurrentIndexPath(currentIndexPath)
+        collectionView!.setCurrentIndexPath(currentIndexPath)
         if pageIndex<2{
-            collectionView.setContentOffset(CGPointZero, animated: false)
+            collectionView!.setContentOffset(CGPointZero, animated: false)
         }else{
-            collectionView.scrollToItemAtIndexPath(currentIndexPath, atScrollPosition: position, animated: false)
+            collectionView!.scrollToItemAtIndexPath(currentIndexPath, atScrollPosition: position, animated: false)
         }
     }
     
