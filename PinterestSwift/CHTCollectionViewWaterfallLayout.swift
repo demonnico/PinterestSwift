@@ -190,7 +190,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
             }
             top += sectionInset.top
             for var idx = 0; idx < self.columnCount; idx++ {
-                self.columnHeights.setObject(top, atIndexedSubscript: idx)
+                self.columnHeights[idx]=top;
             }
             
             /*
@@ -216,7 +216,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
                 attributes.frame = CGRectMake(xOffset, CGFloat(yOffset), itemWidth, itemHeight)
                 itemAttributes.addObject(attributes)
                 self.allItemAttributes.addObject(attributes)
-                self.columnHeights.setObject(CGRectGetMaxY(attributes.frame) + minimumInteritemSpacing, atIndexedSubscript: columnIndex)
+                self.columnHeights[columnIndex]=CGRectGetMaxY(attributes.frame) + minimumInteritemSpacing;
             }
             self.sectionItemAttributes.addObject(itemAttributes)
             
@@ -242,7 +242,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
             }
             
             for var idx = 0; idx < self.columnCount; idx++ {
-                self.columnHeights.setObject(top, atIndexedSubscript: idx)
+                self.columnHeights[idx] = top
             }
         }
         

@@ -18,12 +18,12 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
     
     init(collectionViewLayout layout: UICollectionViewLayout!, currentIndexPath indexPath: NSIndexPath){
         super.init(collectionViewLayout:layout)
-        self.collectionView!.pagingEnabled = true
-        self.collectionView!.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
-        collectionView!.setCurrentIndexPath(indexPath)
-        self.collectionView!.performBatchUpdates({self.collectionView!.reloadData()}, completion: { finished in
+        self.collectionView.pagingEnabled = true
+        self.collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
+        collectionView.setCurrentIndexPath(indexPath)
+        self.collectionView.performBatchUpdates({self.collectionView.reloadData()}, completion: { finished in
             if finished {
-                self.collectionView!.scrollToItemAtIndexPath(indexPath,atScrollPosition:.CenteredHorizontally, animated: false)
+                self.collectionView.scrollToItemAtIndexPath(indexPath,atScrollPosition:.CenteredHorizontally, animated: false)
             }});
     }
 

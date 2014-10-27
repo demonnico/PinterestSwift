@@ -15,7 +15,7 @@ class NTTableViewCell : UITableViewCell{
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.textLabel!.font = UIFont.systemFontOfSize(13)
+        self.textLabel.font = UIFont.systemFontOfSize(13)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -24,10 +24,10 @@ class NTTableViewCell : UITableViewCell{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView!.frame = CGRectZero
-        if (imageView!.image != nil) {
-            let imageHeight = imageView!.image!.size.height*screenWidth/imageView!.image!.size.width
-            imageView!.frame = CGRectMake(0, 0, screenWidth, imageHeight)
+        imageView.frame = CGRectZero
+        if (imageView.image != nil) {
+            let imageHeight = imageView.image!.size.height*screenWidth/imageView.image!.size.width
+            imageView.frame = CGRectMake(0, 0, screenWidth, imageHeight)
         }
     }
 }
@@ -63,13 +63,13 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentify) as NTTableViewCell!
-        cell.imageView!.image = nil
-        cell.textLabel!.text = nil
+        cell.imageView.image = nil
+        cell.textLabel.text = nil
         if indexPath.row == 0 {
             let image = UIImage(named: imageName!)
-            cell.imageView!.image = image
+            cell.imageView.image = image
         }else{
-            cell.textLabel!.text = "try pull to pop view controller 😃"
+            cell.textLabel.text = "try pull to pop view controller 😃"
         }
         cell.setNeedsLayout()
         return cell
@@ -79,7 +79,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         var cellHeight : CGFloat = navigationHeight
         if indexPath.row == 0{
-            let image = UIImage(named: imageName!)
+            let image:UIImage! = UIImage(named: imageName!)
             let imageHeight = image.size.height*screenWidth/image.size.width
             cellHeight = imageHeight
         }
