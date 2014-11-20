@@ -20,7 +20,7 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
         super.init(collectionViewLayout:layout)
         self.collectionView.pagingEnabled = true
         self.collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
-        collectionView.setCurrentIndexPath(indexPath)
+        collectionView.setToIndexPath(indexPath)
         self.collectionView.performBatchUpdates({self.collectionView.reloadData()}, completion: { finished in
             if finished {
                 self.collectionView.scrollToItemAtIndexPath(indexPath,atScrollPosition:.CenteredHorizontally, animated: false)

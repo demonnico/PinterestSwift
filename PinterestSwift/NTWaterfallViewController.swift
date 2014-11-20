@@ -64,7 +64,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         let pageViewController =
         NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout(), currentIndexPath:indexPath)
         pageViewController.imageNameList = imageNameList
-        collectionView.setCurrentIndexPath(indexPath)
+        collectionView.setToIndexPath(indexPath)
         navigationController!.pushViewController(pageViewController, animated: true)
     }
     
@@ -88,7 +88,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
            position = .Top
         }
         let currentIndexPath = NSIndexPath(forRow: pageIndex, inSection: 0)
-        collectionView.setCurrentIndexPath(currentIndexPath)
+        collectionView.setToIndexPath(currentIndexPath)
         if pageIndex<2{
             collectionView.setContentOffset(CGPointZero, animated: false)
         }else{
