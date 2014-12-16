@@ -35,11 +35,12 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
             index++
         }
         
-        collectionView.frame = screenBounds
-        collectionView.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
-        collectionView.backgroundColor = UIColor.grayColor()
-        collectionView.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
-        collectionView.reloadData()
+        let collection :UICollectionView = collectionView!;
+        collection.frame = screenBounds
+        collection.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
+        collection.backgroundColor = UIColor.grayColor()
+        collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
+        collection.reloadData()
 
     }
     
@@ -88,6 +89,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
            position = .Top
         }
         let currentIndexPath = NSIndexPath(forRow: pageIndex, inSection: 0)
+        let collectionView = self.collectionView!;
         collectionView.setToIndexPath(currentIndexPath)
         if pageIndex<2{
             collectionView.setContentOffset(CGPointZero, animated: false)

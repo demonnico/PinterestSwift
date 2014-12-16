@@ -16,7 +16,7 @@ class NTNavigationController : UINavigationController{
         let toViewController = self.viewControllers[childrenCount-2] as NTWaterFallViewControllerProtocol
         let toView = toViewController.transitionCollectionView()
         let popedViewController = self.viewControllers[childrenCount-1] as UICollectionViewController
-        let popView  = popedViewController.collectionView
+        let popView  = popedViewController.collectionView!;
         let indexPath = popView.fromPageIndexPath()
         toViewController.viewWillAppearWithPageIndex(indexPath.row)
         toView.setToIndexPath(indexPath)
