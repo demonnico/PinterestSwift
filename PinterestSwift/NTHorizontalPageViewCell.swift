@@ -63,7 +63,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentify) as NTTableViewCell!
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentify) as! NTTableViewCell!
         cell.imageView?.image = nil
         cell.textLabel?.text = nil
         if indexPath.row == 0 {
@@ -87,7 +87,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         return cellHeight
     }
     
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!){
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         tappedAction?()
     }
     

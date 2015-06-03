@@ -264,7 +264,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         }
         
         var contentSize = self.collectionView!.bounds.size as CGSize
-        let height = self.columnHeights.objectAtIndex(0) as NSNumber
+        let height = self.columnHeights.objectAtIndex(0) as! NSNumber
         contentSize.height = CGFloat(height.doubleValue)
         return  contentSize
     }
@@ -276,16 +276,16 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         if indexPath.item >= self.sectionItemAttributes.objectAtIndex(indexPath.section).count{
             return nil;
         }
-        var list = self.sectionItemAttributes.objectAtIndex(indexPath.section) as NSArray
-        return list.objectAtIndex(indexPath.item) as UICollectionViewLayoutAttributes
+        var list = self.sectionItemAttributes.objectAtIndex(indexPath.section) as! NSArray
+        return list.objectAtIndex(indexPath.item) as! UICollectionViewLayoutAttributes
     }
     
     override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes{
         var attribute = UICollectionViewLayoutAttributes()
         if elementKind == CHTCollectionElementKindSectionHeader{
-            attribute = self.headersAttributes.objectForKey(indexPath.section) as UICollectionViewLayoutAttributes
+            attribute = self.headersAttributes.objectForKey(indexPath.section) as! UICollectionViewLayoutAttributes
         }else if elementKind == CHTCollectionElementKindSectionFooter{
-            attribute = self.footersAttributes.objectForKey(indexPath.section) as UICollectionViewLayoutAttributes
+            attribute = self.footersAttributes.objectForKey(indexPath.section) as! UICollectionViewLayoutAttributes
         }
         return attribute
     }
@@ -308,13 +308,13 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
             }
         }
         for var i = begin; i < end; i++ {
-            var attr = self.allItemAttributes.objectAtIndex(i) as UICollectionViewLayoutAttributes
+            var attr = self.allItemAttributes.objectAtIndex(i) as! UICollectionViewLayoutAttributes
             if CGRectIntersectsRect(rect, attr.frame) {
                 attrs.addObject(attr)
             }
         }
             
-        return NSArray(array: attrs)
+        return NSArray(array: attrs) as [AnyObject]
     }
     
     override func shouldInvalidateLayoutForBoundsChange (newBounds : CGRect) -> Bool {

@@ -11,7 +11,7 @@ import UIKit
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
 class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate{
-    func navigationController(navigationController: UINavigationController!, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController!, toViewController toVC: UIViewController!) -> UIViewControllerAnimatedTransitioning!{
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
         let transition = NTTransition()
         transition.presenting = operation == .Pop
         return  transition
@@ -45,14 +45,14 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
-        let image:UIImage! = UIImage(named: self.imageNameList[indexPath.row] as NSString)
+        let image:UIImage! = UIImage(named: self.imageNameList[indexPath.row] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         return CGSizeMake(gridWidth, imageHeight)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as NTWaterfallViewCell
-        collectionCell.imageName = self.imageNameList[indexPath.row]
+        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
+        collectionCell.imageName = self.imageNameList[indexPath.row] as String
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
@@ -83,7 +83,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
         var position : UICollectionViewScrollPosition =
         .CenteredHorizontally & .CenteredVertically
-        let image:UIImage! = UIImage(named: self.imageNameList[pageIndex] as NSString)
+        let image:UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image
            position = .Top
