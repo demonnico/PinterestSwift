@@ -1,7 +1,7 @@
 PinterestSwift
 ==============
 
-***Please Build With Xcode 6.1.1***
+Compatible with Xcode 6.3 / Swift 1.2
 
 This is a Swift based demo project to show how to make the transition Pinterest 2.0+ liked.
 
