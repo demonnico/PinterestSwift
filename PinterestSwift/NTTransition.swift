@@ -34,7 +34,7 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
             waterFallView.layoutIfNeeded()
             let indexPath = pageView.fromPageIndexPath()
             let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
-            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: nil)
+            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: toViewController.view)
 
             let snapShot = (gridView as! NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
             snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
