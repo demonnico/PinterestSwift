@@ -113,12 +113,6 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
     }
     
     func itemWidthInSectionAtIndex (section : NSInteger) -> CGFloat {
-        var insets : UIEdgeInsets
-        if let sectionInsets = self.delegate?.colletionView?(self.collectionView!, layout: self, insetForSectionAtIndex: section){
-            insets = sectionInsets
-        }else{
-            insets = self.sectionInset
-        }
         let width:CGFloat = self.collectionView!.frame.size.width - sectionInset.left-sectionInset.right
         let spaceColumCount:CGFloat = CGFloat(self.columnCount-1)
         return floor((width - (spaceColumCount*self.minimumColumnSpacing)) / CGFloat(self.columnCount))
@@ -157,13 +151,6 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
                 minimumInteritemSpacing = miniumSpaceing
             }else{
                 minimumInteritemSpacing = self.minimumColumnSpacing
-            }
-            
-            var sectionInsets :  UIEdgeInsets
-            if let insets = self.delegate?.colletionView?(self.collectionView!, layout: self, insetForSectionAtIndex: section){
-                sectionInsets = insets
-            }else{
-                sectionInsets = self.sectionInset
             }
             
             let width = self.collectionView!.frame.size.width - sectionInset.left - sectionInset.right
