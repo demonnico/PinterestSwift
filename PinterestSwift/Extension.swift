@@ -28,7 +28,7 @@ extension UICollectionView{
 //    http://stackoverflow.com/questions/24021291/import-extension-file-in-swift
     
     func setToIndexPath (indexPath : NSIndexPath){
-        objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy(OBJC_ASSOCIATION_RETAIN_NONATOMIC))
+        objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
     func toIndexPath () -> NSIndexPath {

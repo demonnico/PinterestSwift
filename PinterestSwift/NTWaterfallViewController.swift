@@ -51,7 +51,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
+        let collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row] as String
         collectionCell.setNeedsLayout()
         return collectionCell;
@@ -82,7 +82,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     
     func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
         var position : UICollectionViewScrollPosition =
-        .CenteredHorizontally & .CenteredVertically
+        UICollectionViewScrollPosition.CenteredHorizontally.intersect(.CenteredVertically)
         let image:UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image

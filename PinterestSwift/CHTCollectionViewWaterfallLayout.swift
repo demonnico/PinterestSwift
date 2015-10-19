@@ -108,7 +108,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         super.init()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -236,16 +236,16 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         idx = 0;
         let itemCounts = self.allItemAttributes.count
         while(idx < itemCounts){
-            var rect1 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
+            let rect1 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
             idx = min(idx + unionSize, itemCounts) - 1
-            var rect2 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
+            let rect2 = self.allItemAttributes.objectAtIndex(idx).frame as CGRect
             self.unionRects.addObject(NSValue(CGRect:CGRectUnion(rect1,rect2)))
             idx++
         }
     }
     
     override func collectionViewContentSize() -> CGSize{
-        var numberOfSections = self.collectionView!.numberOfSections()
+        let numberOfSections = self.collectionView!.numberOfSections()
         if numberOfSections == 0{
             return CGSizeZero
         }
@@ -256,15 +256,15 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         return  contentSize
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes!{
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes?{
         if indexPath.section >= self.sectionItemAttributes.count{
             return nil
         }
         if indexPath.item >= self.sectionItemAttributes.objectAtIndex(indexPath.section).count{
             return nil;
         }
-        var list = self.sectionItemAttributes.objectAtIndex(indexPath.section) as! NSArray
-        return list.objectAtIndex(indexPath.item) as! UICollectionViewLayoutAttributes
+        let list = self.sectionItemAttributes.objectAtIndex(indexPath.section) as! NSArray
+        return list.objectAtIndex(indexPath.item) as? UICollectionViewLayoutAttributes
     }
     
     override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes{
@@ -277,35 +277,34 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         return attribute
     }
     
-    override func layoutAttributesForElementsInRect (rect : CGRect) -> [AnyObject] {
-        var i = 0
+    override func layoutAttributesForElementsInRect (rect : CGRect) -> [UICollectionViewLayoutAttributes] {
         var begin = 0, end = self.unionRects.count
-        var attrs = NSMutableArray()
+        let attrs = NSMutableArray()
         
         for var i = 0; i < end; i++ {
-            if CGRectIntersectsRect(rect, self.unionRects.objectAtIndex(i).CGRectValue()){
+            if CGRectIntersectsRect(rect, self.unionRects.objectAtIndex(i).CGRectValue){
                 begin = i * unionSize;
                 break
             }
         }
         for var i = self.unionRects.count - 1; i>=0; i-- {
-            if CGRectIntersectsRect(rect, self.unionRects.objectAtIndex(i).CGRectValue()){
+            if CGRectIntersectsRect(rect, self.unionRects.objectAtIndex(i).CGRectValue){
                 end = min((i+1)*unionSize,self.allItemAttributes.count)
                 break
             }
         }
         for var i = begin; i < end; i++ {
-            var attr = self.allItemAttributes.objectAtIndex(i) as! UICollectionViewLayoutAttributes
+            let attr = self.allItemAttributes.objectAtIndex(i) as! UICollectionViewLayoutAttributes
             if CGRectIntersectsRect(rect, attr.frame) {
                 attrs.addObject(attr)
             }
         }
             
-        return NSArray(array: attrs) as [AnyObject]
+        return NSArray(array: attrs) as! [UICollectionViewLayoutAttributes]
     }
     
     override func shouldInvalidateLayoutForBoundsChange (newBounds : CGRect) -> Bool {
-        var oldBounds = self.collectionView!.bounds
+        let oldBounds = self.collectionView!.bounds
         if CGRectGetWidth(newBounds) != CGRectGetWidth(oldBounds){
             return true
         }
@@ -322,7 +321,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         var index = 0
         var shorestHeight = MAXFLOAT
 
-        self.columnHeights.enumerateObjectsUsingBlock({(object : AnyObject!, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
+        self.columnHeights.enumerateObjectsUsingBlock({(object : AnyObject, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
             let height = object.floatValue
             if (height<shorestHeight){
                 shorestHeight = height
@@ -342,7 +341,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         var index = 0
         var longestHeight:CGFloat = 0.0
         
-        self.columnHeights.enumerateObjectsUsingBlock({(object : AnyObject!, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
+        self.columnHeights.enumerateObjectsUsingBlock({(object : AnyObject, idx : NSInteger,pointer :UnsafeMutablePointer<ObjCBool>) in
             let height = CGFloat(object.floatValue)
             if (height > longestHeight){
                 longestHeight = height
@@ -353,8 +352,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
     }
 
     /**
-    *  Find the index for the next column.
-    *
+    *  Find the index for the next column.d    *
     *  @return index for the next column
     */
     func nextColumnIndexForItem (item : NSInteger) -> Int {

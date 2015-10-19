@@ -28,7 +28,7 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
             }});
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -37,7 +37,7 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        var collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as! NTHorizontalPageViewCell
+        let collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as! NTHorizontalPageViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row] as String
         collectionCell.tappedAction = {}
         collectionCell.pullAction = { offset in
