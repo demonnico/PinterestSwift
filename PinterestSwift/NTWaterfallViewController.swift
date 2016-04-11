@@ -46,7 +46,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         while(index<14){
             let imageName = NSString(format: "%d.jpg", index)
             imageNameList.append(imageName)
-            index++
+            index += 1
         }
         
         let collection :UICollectionView = collectionView!;
