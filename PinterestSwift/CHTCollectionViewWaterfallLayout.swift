@@ -28,9 +28,9 @@ import UIKit
 }
 
 enum CHTCollectionViewWaterfallLayoutItemRenderDirection : NSInteger{
-    case CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst
-    case CHTCollectionViewWaterfallLayoutItemRenderDirectionLeftToRight
-    case CHTCollectionViewWaterfallLayoutItemRenderDirectionRightToLeft
+    case ShortestFirst
+    case LeftToRight
+    case RightToLeft
 }
 
 class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
@@ -95,8 +95,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         self.minimumInteritemSpacing = 10
         self.minimumColumnSpacing = 10
         self.sectionInset = UIEdgeInsetsZero
-        self.itemRenderDirection =
-        CHTCollectionViewWaterfallLayoutItemRenderDirection.CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst
+        self.itemRenderDirection = .ShortestFirst
 
         headersAttributes = NSMutableDictionary()
         footersAttributes = NSMutableDictionary()
@@ -360,11 +359,11 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
     func nextColumnIndexForItem (item : NSInteger) -> Int {
         var index = 0
         switch (self.itemRenderDirection){
-        case .CHTCollectionViewWaterfallLayoutItemRenderDirectionShortestFirst :
+        case .ShortestFirst :
             index = self.shortestColumnIndex()
-        case .CHTCollectionViewWaterfallLayoutItemRenderDirectionLeftToRight :
+        case .LeftToRight :
             index = (item%self.columnCount)
-        case .CHTCollectionViewWaterfallLayoutItemRenderDirectionRightToLeft:
+        case .RightToLeft:
             index = (self.columnCount - 1) - (item % self.columnCount);
 //        default:
 //            index = self.shortestColumnIndex()
