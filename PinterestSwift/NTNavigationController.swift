@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 class NTNavigationController : UINavigationController{
-    override func popViewControllerAnimated(animated: Bool) -> UIViewController
+    override func popViewController(animated: Bool) -> UIViewController
     {
         //viewWillAppearWithPageIndex
         let childrenCount = self.viewControllers.count
@@ -18,9 +18,9 @@ class NTNavigationController : UINavigationController{
         let popedViewController = self.viewControllers[childrenCount-1] as! UICollectionViewController
         let popView  = popedViewController.collectionView!;
         let indexPath = popView.fromPageIndexPath()
-        toViewController.viewWillAppearWithPageIndex(indexPath.row)
-        toView.setToIndexPath(indexPath)
-        return super.popViewControllerAnimated(animated)!
+        toViewController.viewWillAppearWithPageIndex((indexPath as NSIndexPath).row)
+        toView?.setToIndexPath(indexPath)
+        return super.popViewController(animated: animated)!
     }
     
 //    override func pushViewController(viewController: UIViewController!, animated: Bool) {

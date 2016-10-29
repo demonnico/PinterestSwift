@@ -16,12 +16,12 @@ class NTWaterfallViewCell :UICollectionViewCell, NTTansitionWaterfallGridViewPro
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGray
         contentView.addSubview(imageViewContent)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageViewContent.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
+        imageViewContent.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
         imageViewContent.image = UIImage(named: imageName!)
     }
     

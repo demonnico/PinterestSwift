@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView{
-    func origin (point : CGPoint){
+    func origin (_ point : CGPoint){
         frame.origin.x = point.x
         frame.origin.y = point.y
     }
@@ -27,23 +27,23 @@ extension UICollectionView{
 //    }} WTF! error when building, it's a bug 
 //    http://stackoverflow.com/questions/24021291/import-extension-file-in-swift
     
-    func setToIndexPath (indexPath : NSIndexPath){
+    func setToIndexPath (_ indexPath : IndexPath){
         objc_setAssociatedObject(self, &kIndexPathPointer, indexPath, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     
-    func toIndexPath () -> NSIndexPath {
+    func toIndexPath () -> IndexPath {
         let index = self.contentOffset.x/self.frame.size.width
         if index > 0{
-            return NSIndexPath(forRow: Int(index), inSection: 0)
-        }else if let indexPath = objc_getAssociatedObject(self,&kIndexPathPointer) as? NSIndexPath {
+            return IndexPath(row: Int(index), section: 0)
+        }else if let indexPath = objc_getAssociatedObject(self,&kIndexPathPointer) as? IndexPath {
             return indexPath
         }else{
-            return NSIndexPath(forRow: 0, inSection: 0)
+            return IndexPath(row: 0, section: 0)
         }
     }
     
-    func fromPageIndexPath () -> NSIndexPath{
+    func fromPageIndexPath () -> IndexPath{
         let index : Int = Int(self.contentOffset.x/self.frame.size.width)
-        return NSIndexPath(forRow: index, inSection: 0)
+        return IndexPath(row: index, section: 0)
     }
 }
