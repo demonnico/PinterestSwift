@@ -14,17 +14,17 @@ let horizontalPageViewCellIdentify = "horizontalPageViewCellIdentify"
 class NTHorizontalPageViewController : UICollectionViewController, NTTransitionProtocol ,NTHorizontalPageViewControllerProtocol{
     
     var imageNameList : Array <NSString> = []
-    var pullOffset = CGPointZero
+    var pullOffset = CGPoint.zero
     
-    init(collectionViewLayout layout: UICollectionViewLayout!, currentIndexPath indexPath: NSIndexPath){
+    init(collectionViewLayout layout: UICollectionViewLayout!, currentIndexPath indexPath: IndexPath){
         super.init(collectionViewLayout:layout)
         let collectionView :UICollectionView = self.collectionView!;
-        collectionView.pagingEnabled = true
-        collectionView.registerClass(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
+        collectionView.isPagingEnabled = true
+        collectionView.register(NTHorizontalPageViewCell.self, forCellWithReuseIdentifier: horizontalPageViewCellIdentify)
         collectionView.setToIndexPath(indexPath)
         collectionView.performBatchUpdates({collectionView.reloadData()}, completion: { finished in
             if finished {
-                collectionView.scrollToItemAtIndexPath(indexPath,atScrollPosition:.CenteredHorizontally, animated: false)
+                collectionView.scrollToItem(at: indexPath,at:.centeredHorizontally, animated: false)
             }});
     }
 
@@ -36,19 +36,19 @@ class NTHorizontalPageViewController : UICollectionViewController, NTTransitionP
         super.viewDidLoad()
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        let collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(horizontalPageViewCellIdentify, forIndexPath: indexPath) as! NTHorizontalPageViewCell
-        collectionCell.imageName = self.imageNameList[indexPath.row] as String
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let collectionCell: NTHorizontalPageViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: horizontalPageViewCellIdentify, for: indexPath) as! NTHorizontalPageViewCell
+        collectionCell.imageName = self.imageNameList[(indexPath as NSIndexPath).row] as String
         collectionCell.tappedAction = {}
         collectionCell.pullAction = { offset in
             self.pullOffset = offset
-            self.navigationController!.popViewControllerAnimated(true)
+            self.navigationController!.popViewController(animated: true)
         }
         collectionCell.setNeedsLayout()
         return collectionCell
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
     }
     
