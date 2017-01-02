@@ -66,7 +66,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify) as! NTTableViewCell!
         cell?.imageView?.image = nil
         cell?.textLabel?.text = nil
-        if (indexPath as NSIndexPath).row == 0 {
+        if indexPath.row == 0 {
             let image = UIImage(named: imageName!)
             cell?.imageView?.image = image
         }else{
@@ -79,7 +79,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         var cellHeight : CGFloat = navigationHeight
-        if (indexPath as NSIndexPath).row == 0{
+        if indexPath.row == 0{
             let image:UIImage! = UIImage(named: imageName!)
             let imageHeight = image.size.height*screenWidth/image.size.width
             cellHeight = imageHeight

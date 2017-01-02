@@ -276,22 +276,22 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes?{
-        if (indexPath as NSIndexPath).section >= self.sectionItemAttributes.count{
+        if indexPath.section >= self.sectionItemAttributes.count {
             return nil
         }
-        if (indexPath as NSIndexPath).item >= (self.sectionItemAttributes.object(at: (indexPath as NSIndexPath).section) as AnyObject).count{
+        if indexPath.item >= (self.sectionItemAttributes.object(at: indexPath.section) as AnyObject).count{
             return nil;
         }
-        let list = self.sectionItemAttributes.object(at: (indexPath as NSIndexPath).section) as! NSArray
-        return list.object(at: (indexPath as NSIndexPath).item) as? UICollectionViewLayoutAttributes
+        let list = self.sectionItemAttributes.object(at: indexPath.section) as! NSArray
+        return list.object(at: indexPath.item) as? UICollectionViewLayoutAttributes
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes{
         var attribute = UICollectionViewLayoutAttributes()
         if elementKind == CHTCollectionElementKindSectionHeader{
-            attribute = self.headersAttributes.object(forKey: (indexPath as NSIndexPath).section) as! UICollectionViewLayoutAttributes
+            attribute = self.headersAttributes.object(forKey: indexPath.section) as! UICollectionViewLayoutAttributes
         }else if elementKind == CHTCollectionElementKindSectionFooter{
-            attribute = self.footersAttributes.object(forKey: (indexPath as NSIndexPath).section) as! UICollectionViewLayoutAttributes
+            attribute = self.footersAttributes.object(forKey: indexPath.section) as! UICollectionViewLayoutAttributes
         }
         return attribute
     }
@@ -361,7 +361,7 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
 
     func longestColumnIndex () -> NSInteger {
         var index = 0
-        var longestHeight:CGFloat = 0.0
+        var longestHeight: CGFloat = 0.0
         
         self.columnHeights.enumerateObjects({(object : Any, idx : Int,pointer :UnsafeMutablePointer<ObjCBool>) in
             let height = CGFloat((object as AnyObject).floatValue!)
