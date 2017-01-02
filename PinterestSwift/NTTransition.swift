@@ -15,96 +15,96 @@ let animationScale = screenWidth/gridWidth // screenWidth / the width of waterfa
 class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     var presenting = false
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval{
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval{
         return animationDuration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as UIViewController!
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UIViewController!
-        let containerView = transitionContext.containerView()!
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as UIViewController!
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as UIViewController!
+        let containerView = transitionContext.containerView
 
         if presenting {
-            let toView = toViewController.view!
+            let toView = toViewController!.view!
             containerView.addSubview(toView)
-            toView.hidden = true
+            toView.isHidden = true
             
-            let waterFallView = (toViewController as! NTTransitionProtocol).transitionCollectionView()
-            let pageView = (fromViewController as! NTTransitionProtocol).transitionCollectionView()
+            let waterFallView = (toViewController! as! NTTransitionProtocol).transitionCollectionView()!
+            let pageView = (fromViewController as! NTTransitionProtocol).transitionCollectionView()!
             waterFallView.layoutIfNeeded()
             let indexPath = pageView.fromPageIndexPath()
-            let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
-            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: toViewController.view)
+            let gridView = waterFallView.cellForItem(at: indexPath)
+            let leftUpperPoint = gridView!.convert(CGPoint.zero, to: toViewController!.view)
 
             let snapShot = (gridView as! NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
-            snapShot.transform = CGAffineTransformMakeScale(animationScale, animationScale)
+            snapShot?.transform = CGAffineTransform(scaleX: animationScale, y: animationScale)
             let pullOffsetY = (fromViewController as! NTHorizontalPageViewControllerProtocol).pageViewCellScrollViewContentOffset().y
-            let offsetY : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
-            snapShot.origin(CGPointMake(0, -pullOffsetY+offsetY))
-            containerView.addSubview(snapShot)
+            let offsetY : CGFloat = fromViewController!.navigationController!.isNavigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+            snapShot?.origin(CGPoint(x: 0, y: -pullOffsetY+offsetY))
+            containerView.addSubview(snapShot!)
             
-            toView.hidden = false
+            toView.isHidden = false
             toView.alpha = 0
-            toView.transform = snapShot.transform
-            toView.frame = CGRectMake(-(leftUpperPoint.x * animationScale),-((leftUpperPoint.y-offsetY) * animationScale+pullOffsetY+offsetY),
-                toView.frame.size.width, toView.frame.size.height)
+            toView.transform = (snapShot?.transform)!
+            toView.frame = CGRect(x: -(leftUpperPoint.x * animationScale),y: -((leftUpperPoint.y-offsetY) * animationScale+pullOffsetY+offsetY),
+                width: toView.frame.size.width, height: toView.frame.size.height)
             let whiteViewContainer = UIView(frame: screenBounds)
-            whiteViewContainer.backgroundColor = UIColor.whiteColor()
-            containerView.addSubview(snapShot)
+            whiteViewContainer.backgroundColor = UIColor.white
+            containerView.addSubview(snapShot!)
             containerView.insertSubview(whiteViewContainer, belowSubview: toView)
             
-            UIView.animateWithDuration(animationDuration, animations: {
-                snapShot.transform = CGAffineTransformIdentity
-                snapShot.frame = CGRectMake(leftUpperPoint.x, leftUpperPoint.y, snapShot.frame.size.width, snapShot.frame.size.height)
-                toView.transform = CGAffineTransformIdentity
-                toView.frame = CGRectMake(0, 0, toView.frame.size.width, toView.frame.size.height);
+            UIView.animate(withDuration: animationDuration, animations: {
+                snapShot?.transform = CGAffineTransform.identity
+                snapShot?.frame = CGRect(x: leftUpperPoint.x, y: leftUpperPoint.y, width: (snapShot?.frame.size.width)!, height: (snapShot?.frame.size.height)!)
+                toView.transform = CGAffineTransform.identity
+                toView.frame = CGRect(x: 0, y: 0, width: toView.frame.size.width, height: toView.frame.size.height);
                 toView.alpha = 1
                 }, completion:{finished in
                     if finished {
-                        snapShot.removeFromSuperview()
+                        snapShot?.removeFromSuperview()
                         whiteViewContainer.removeFromSuperview()
                         transitionContext.completeTransition(true)
                     }
                 })
         }else{
-            let fromView = fromViewController.view
-            let toView = toViewController.view
+            let fromView = fromViewController!.view!
+            let toView = toViewController!.view
             
             let waterFallView : UICollectionView = (fromViewController as! NTTransitionProtocol).transitionCollectionView()
-            let pageView : UICollectionView = (toViewController as! NTTransitionProtocol).transitionCollectionView()
+            let pageView : UICollectionView = (toViewController! as! NTTransitionProtocol).transitionCollectionView()
             
             containerView.addSubview(fromView)
-            containerView.addSubview(toView)
+            containerView.addSubview(toView!)
             
             let indexPath = waterFallView.toIndexPath()
-            let gridView = waterFallView.cellForItemAtIndexPath(indexPath)
+            let gridView = waterFallView.cellForItem(at: indexPath as IndexPath)
             
-            let leftUpperPoint = gridView!.convertPoint(CGPointZero, toView: nil)
-            pageView.hidden = true
-            pageView.scrollToItemAtIndexPath(indexPath, atScrollPosition:.CenteredHorizontally, animated: false)
+            let leftUpperPoint = gridView!.convert(CGPoint.zero, to: nil)
+            pageView.isHidden = true
+            pageView.scrollToItem(at: indexPath as IndexPath, at:.centeredHorizontally, animated: false)
             
-            let offsetY : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
-            let offsetStatuBar : CGFloat = fromViewController.navigationController!.navigationBarHidden ? 0.0 :
+            let offsetY : CGFloat = fromViewController!.navigationController!.isNavigationBarHidden ? 0.0 : navigationHeaderAndStatusbarHeight
+            let offsetStatuBar : CGFloat = fromViewController!.navigationController!.isNavigationBarHidden ? 0.0 :
                 statubarHeight;
             let snapShot = (gridView as! NTTansitionWaterfallGridViewProtocol).snapShotForTransition()
-            containerView.addSubview(snapShot)
-            snapShot.origin(leftUpperPoint)
-            UIView.animateWithDuration(animationDuration, animations: {
-                snapShot.transform = CGAffineTransformMakeScale(animationScale,
-                    animationScale)
-                snapShot.frame = CGRectMake(0, offsetY, snapShot.frame.size.width, snapShot.frame.size.height)
+            containerView.addSubview(snapShot!)
+            snapShot?.origin(leftUpperPoint)
+            UIView.animate(withDuration: animationDuration, animations: {
+                snapShot?.transform = CGAffineTransform(scaleX: animationScale,
+                    y: animationScale)
+                snapShot?.frame = CGRect(x: 0, y: offsetY, width: (snapShot?.frame.size.width)!, height: (snapShot?.frame.size.height)!)
                 
                 fromView.alpha = 0
-                fromView.transform = snapShot.transform
-                fromView.frame = CGRectMake(-(leftUpperPoint.x)*animationScale,
-                    -(leftUpperPoint.y-offsetStatuBar)*animationScale+offsetStatuBar,
-                    fromView.frame.size.width,
-                    fromView.frame.size.height)
+                fromView.transform = (snapShot?.transform)!
+                fromView.frame = CGRect(x: -(leftUpperPoint.x)*animationScale,
+                    y: -(leftUpperPoint.y-offsetStatuBar)*animationScale+offsetStatuBar,
+                    width: fromView.frame.size.width,
+                    height: fromView.frame.size.height)
                 },completion:{finished in
                     if finished {
-                        snapShot.removeFromSuperview()
-                        pageView.hidden = false
-                        fromView.transform = CGAffineTransformIdentity
+                        snapShot?.removeFromSuperview()
+                        pageView.isHidden = false
+                        fromView.transform = CGAffineTransform.identity
                         transitionContext.completeTransition(true)
                     }
                 })

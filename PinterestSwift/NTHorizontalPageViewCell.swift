@@ -15,7 +15,7 @@ class NTTableViewCell : UITableViewCell{
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.textLabel?.font = UIFont.systemFontOfSize(13)
+        self.textLabel?.font = UIFont.systemFont(ofSize: 13)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -25,25 +25,25 @@ class NTTableViewCell : UITableViewCell{
     override func layoutSubviews() {
         super.layoutSubviews()
         let imageView :UIImageView = self.imageView!;
-        imageView.frame = CGRectZero
+        imageView.frame = CGRect.zero
         if (imageView.image != nil) {
             let imageHeight = imageView.image!.size.height*screenWidth/imageView.image!.size.width
-            imageView.frame = CGRectMake(0, 0, screenWidth, imageHeight)
+            imageView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: imageHeight)
         }
     }
 }
 
 class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITableViewDataSource{
     var imageName : String?
-    var pullAction : ((offset : CGPoint) -> Void)?
+    var pullAction : ((_ offset : CGPoint) -> Void)?
     var tappedAction : (() -> Void)?
-    let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.Plain)
+    let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.plain)
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGray
         
         contentView.addSubview(tableView)
-        tableView.registerClass(NTTableViewCell.self, forCellReuseIdentifier: cellIdentify)
+        tableView.register(NTTableViewCell.self, forCellReuseIdentifier: cellIdentify)
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -57,27 +57,27 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         tableView.reloadData()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentify) as! NTTableViewCell!
-        cell.imageView?.image = nil
-        cell.textLabel?.text = nil
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify) as! NTTableViewCell!
+        cell?.imageView?.image = nil
+        cell?.textLabel?.text = nil
         if indexPath.row == 0 {
             let image = UIImage(named: imageName!)
-            cell.imageView?.image = image
+            cell?.imageView?.image = image
         }else{
-            cell.textLabel?.text = "try pull to pop view controller 😃"
+            cell?.textLabel?.text = "try pull to pop view controller 😃"
         }
-        cell.setNeedsLayout()
-        return cell
+        cell?.setNeedsLayout()
+        return cell!
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         var cellHeight : CGFloat = navigationHeight
         if indexPath.row == 0{
             let image:UIImage! = UIImage(named: imageName!)
@@ -87,13 +87,13 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
         return cellHeight
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tappedAction?()
     }
     
-    func scrollViewWillBeginDecelerating(scrollView : UIScrollView){
+    func scrollViewWillBeginDecelerating(_ scrollView : UIScrollView){
         if scrollView.contentOffset.y < navigationHeight{
-            pullAction?(offset: scrollView.contentOffset)
+            pullAction?(scrollView.contentOffset)
         }
     }
 }

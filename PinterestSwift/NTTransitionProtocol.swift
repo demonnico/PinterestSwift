@@ -18,7 +18,7 @@ import UIKit
 }
 
 @objc protocol NTWaterFallViewControllerProtocol : NTTransitionProtocol{
-    func viewWillAppearWithPageIndex(pageIndex : NSInteger)
+    func viewWillAppearWithPageIndex(_ pageIndex : NSInteger)
 }
 
 @objc protocol NTHorizontalPageViewControllerProtocol : NTTransitionProtocol{

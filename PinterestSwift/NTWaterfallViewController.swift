@@ -11,7 +11,7 @@ import UIKit
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
 class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate{
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
         
         let fromVCConfromA = (fromVC as? NTTransitionProtocol)
         let fromVCConfromB = (fromVC as? NTWaterFallViewControllerProtocol)
@@ -23,7 +23,7 @@ class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate{
         if((fromVCConfromA != nil)&&(toVCConfromA != nil)&&(
             (fromVCConfromB != nil && toVCConfromC != nil)||(fromVCConfromC != nil && toVCConfromB != nil))){
             let transition = NTTransition()
-            transition.presenting = operation == .Pop
+            transition.presenting = operation == .pop
             return  transition
         }else{
             return nil
@@ -40,10 +40,10 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController!.delegate = delegateHolder
-        self.view.backgroundColor = UIColor.yellowColor()
+        self.view.backgroundColor = UIColor.yellow
         
         var index = 0
-        while(index<14){
+        while index < 14{
             let imageName = NSString(format: "%d.jpg", index)
             imageNameList.append(imageName)
             index += 1
@@ -52,30 +52,30 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         let collection :UICollectionView = collectionView!;
         collection.frame = screenBounds
         collection.setCollectionViewLayout(CHTCollectionViewWaterfallLayout(), animated: false)
-        collection.backgroundColor = UIColor.grayColor()
-        collection.registerClass(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
+        collection.backgroundColor = UIColor.gray
+        collection.register(NTWaterfallViewCell.self, forCellWithReuseIdentifier: waterfallViewCellIdentify)
         collection.reloadData()
 
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize{
         let image:UIImage! = UIImage(named: self.imageNameList[indexPath.row] as String)
-        let imageHeight = image.size.height*gridWidth/image.size.width
-        return CGSizeMake(gridWidth, imageHeight)
+        let imageHeight = image.size.height * gridWidth/image.size.width
+        return CGSize(width: gridWidth, height: imageHeight)
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell{
-        let collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(waterfallViewCellIdentify, forIndexPath: indexPath) as! NTWaterfallViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: waterfallViewCellIdentify, for: indexPath) as! NTWaterfallViewCell
         collectionCell.imageName = self.imageNameList[indexPath.row] as String
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return imageNameList.count;
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         let pageViewController =
         NTHorizontalPageViewController(collectionViewLayout: pageViewControllerLayout(), currentIndexPath:indexPath)
         pageViewController.imageNameList = imageNameList
@@ -85,30 +85,30 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     
     func pageViewControllerLayout () -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        let itemSize  = self.navigationController!.navigationBarHidden ?
-        CGSizeMake(screenWidth, screenHeight+20) : CGSizeMake(screenWidth, screenHeight-navigationHeaderAndStatusbarHeight)
+        let itemSize  = self.navigationController!.isNavigationBarHidden ?
+        CGSize(width: screenWidth, height: screenHeight+20) : CGSize(width: screenWidth, height: screenHeight-navigationHeaderAndStatusbarHeight)
         flowLayout.itemSize = itemSize
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
-        flowLayout.scrollDirection = .Horizontal
+        flowLayout.scrollDirection = .horizontal
         return flowLayout
     }
     
-    func viewWillAppearWithPageIndex(pageIndex : NSInteger) {
-        var position : UICollectionViewScrollPosition =
-        UICollectionViewScrollPosition.CenteredHorizontally.intersect(.CenteredVertically)
-        let image:UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
+    func viewWillAppearWithPageIndex(_ pageIndex: NSInteger) {
+        var position: UICollectionViewScrollPosition =
+        UICollectionViewScrollPosition.centeredHorizontally.intersection(.centeredVertically)
+        let image: UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image
-           position = .Top
+           position = .top
         }
-        let currentIndexPath = NSIndexPath(forRow: pageIndex, inSection: 0)
+        let currentIndexPath = IndexPath(row: pageIndex, section: 0)
         let collectionView = self.collectionView!;
         collectionView.setToIndexPath(currentIndexPath)
-        if pageIndex<2{
-            collectionView.setContentOffset(CGPointZero, animated: false)
-        }else{
-            collectionView.scrollToItemAtIndexPath(currentIndexPath, atScrollPosition: position, animated: false)
+        if pageIndex < 2 {
+            collectionView.setContentOffset(CGPoint.zero, animated: false)
+        } else {
+            collectionView.scrollToItem(at: currentIndexPath, at: position, animated: false)
         }
     }
     
