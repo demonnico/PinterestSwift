@@ -18,7 +18,7 @@ class NTNavigationController : UINavigationController{
         let popedViewController = self.viewControllers[childrenCount-1] as! UICollectionViewController
         let popView  = popedViewController.collectionView!;
         let indexPath = popView.fromPageIndexPath()
-        toViewController.viewWillAppearWithPageIndex((indexPath as NSIndexPath).row)
+        toViewController.viewWillAppearWithPageIndex(indexPath.row)
         toView?.setToIndexPath(indexPath)
         return super.popViewController(animated: animated)!
     }

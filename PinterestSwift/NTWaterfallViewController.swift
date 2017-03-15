@@ -43,7 +43,7 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         self.view.backgroundColor = UIColor.yellow
         
         var index = 0
-        while(index<14){
+        while index < 14{
             let imageName = NSString(format: "%d.jpg", index)
             imageNameList.append(imageName)
             index += 1
@@ -59,14 +59,14 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize{
-        let image:UIImage! = UIImage(named: self.imageNameList[(indexPath as NSIndexPath).row] as String)
-        let imageHeight = image.size.height*gridWidth/image.size.width
+        let image:UIImage! = UIImage(named: self.imageNameList[indexPath.row] as String)
+        let imageHeight = image.size.height * gridWidth/image.size.width
         return CGSize(width: gridWidth, height: imageHeight)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let collectionCell: NTWaterfallViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: waterfallViewCellIdentify, for: indexPath) as! NTWaterfallViewCell
-        collectionCell.imageName = self.imageNameList[(indexPath as NSIndexPath).row] as String
+        collectionCell.imageName = self.imageNameList[indexPath.row] as String
         collectionCell.setNeedsLayout()
         return collectionCell;
     }
@@ -94,10 +94,10 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         return flowLayout
     }
     
-    func viewWillAppearWithPageIndex(_ pageIndex : NSInteger) {
-        var position : UICollectionViewScrollPosition =
+    func viewWillAppearWithPageIndex(_ pageIndex: NSInteger) {
+        var position: UICollectionViewScrollPosition =
         UICollectionViewScrollPosition.centeredHorizontally.intersection(.centeredVertically)
-        let image:UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
+        let image: UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image
            position = .top
@@ -105,9 +105,9 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
         let currentIndexPath = IndexPath(row: pageIndex, section: 0)
         let collectionView = self.collectionView!;
         collectionView.setToIndexPath(currentIndexPath)
-        if pageIndex<2{
+        if pageIndex < 2 {
             collectionView.setContentOffset(CGPoint.zero, animated: false)
-        }else{
+        } else {
             collectionView.scrollToItem(at: currentIndexPath, at: position, animated: false)
         }
     }
