@@ -7,7 +7,7 @@ This is a Swift based demo project to show how to make the transition Pinterest 
 
 Refer from [StackOverFlow](http://stackoverflow.com/questions/22900499/how-to-transition-from-uicollectionview-to-uiviewcontroller-like-pinterest-evern/24399337#24399337)
 
-##TODO
+## TODO
 
 - [x] Rewrite with Swift [CHTCollectionViewWaterfallLayout](https://github.com/chiahsien/CHTCollectionViewWaterfallLayout)
 - [x] ZoomTransition Implementation
@@ -21,7 +21,7 @@ And this is my copy:
 
 ![](https://raw.githubusercontent.com/demon1105/ImagesLib/master/compressed.gif)
 
-##Creator
+## Creator
 
 [Nicholas Tau](http://www.taofengping.com) ([@demonNico](https://twitter.com/demonnico))
 
