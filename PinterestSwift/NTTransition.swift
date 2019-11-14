@@ -20,8 +20,8 @@ class NTTransition : NSObject , UIViewControllerAnimatedTransitioning{
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as UIViewController!
-        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as UIViewController!
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as UIViewController?
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as UIViewController?
         let containerView = transitionContext.containerView
 
         if presenting {
