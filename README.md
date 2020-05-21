@@ -23,7 +23,7 @@ And this is my copy:
 
 ## Creator
 
-[Nicholas Tau](http://www.taofengping.com) ([@demonNico](https://twitter.com/demonnico))
+[Nicholas Tau](http://blog.inico.me) 
 
 ## License
 
