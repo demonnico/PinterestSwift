@@ -13,7 +13,7 @@ let cellIdentify = "cellIdentify"
 
 class NTTableViewCell : UITableViewCell{
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel?.font = UIFont.systemFont(ofSize: 13)
     }
@@ -37,7 +37,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     var imageName : String?
     var pullAction : ((_ offset : CGPoint) -> Void)?
     var tappedAction : (() -> Void)?
-    let tableView = UITableView(frame: screenBounds, style: UITableViewStyle.plain)
+    let tableView = UITableView(frame: screenBounds, style: UITableView.Style.plain)
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.lightGray
@@ -63,7 +63,7 @@ class NTHorizontalPageViewCell : UICollectionViewCell, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify) as! NTTableViewCell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify) as! NTTableViewCell?
         cell?.imageView?.image = nil
         cell?.textLabel?.text = nil
         if indexPath.row == 0 {

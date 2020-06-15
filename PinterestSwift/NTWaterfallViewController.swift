@@ -11,7 +11,7 @@ import UIKit
 let waterfallViewCellIdentify = "waterfallViewCellIdentify"
 
 class NavigationControllerDelegate: NSObject, UINavigationControllerDelegate{
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
         
         let fromVCConfromA = (fromVC as? NTTransitionProtocol)
         let fromVCConfromB = (fromVC as? NTWaterFallViewControllerProtocol)
@@ -95,8 +95,8 @@ class NTWaterfallViewController:UICollectionViewController,CHTCollectionViewDele
     }
     
     func viewWillAppearWithPageIndex(_ pageIndex: NSInteger) {
-        var position: UICollectionViewScrollPosition =
-        UICollectionViewScrollPosition.centeredHorizontally.intersection(.centeredVertically)
+        var position: UICollectionView.ScrollPosition =
+        UICollectionView.ScrollPosition.centeredHorizontally.intersection(.centeredVertically)
         let image: UIImage! = UIImage(named: self.imageNameList[pageIndex] as String)
         let imageHeight = image.size.height*gridWidth/image.size.width
         if imageHeight > 400 {//whatever you like, it's the max value for height of image
